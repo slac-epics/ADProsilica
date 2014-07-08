@@ -13,6 +13,10 @@ include $(TOP)/configure/CONFIG
 
 DB += prosilica.template
 
+ARCHIVE += prosilica.tpl-arch
+
+REQ += prosilica_settings.req
+
 #----------------------------------------------------
 # If <anyname>.db template is not named <anyname>*.template add
 # <anyname>_template = <templatename>
