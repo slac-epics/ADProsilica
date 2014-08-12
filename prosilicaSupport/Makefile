@@ -22,6 +22,9 @@ else ifeq (cygwin-x86, $(findstring cygwin-x86, $(T_A)))
 LIB_INSTALLS_cygwin32    += ../os/win32-x86/PvAPI.lib
 BIN_INSTALLS_cygwin32    += ../os/win32-x86/PvAPI.dll
 
+else ifeq (rhel6-x86_64, $(findstring rhel6-x86_64, $(T_A)))
+LIB_INSTALLS_Linux += ../os/rhel6-x86_64/libPvAPI.a
+
 else ifeq (linux-x86_64, $(findstring linux-x86_64, $(T_A)))
 LIB_INSTALLS_Linux += ../os/linux-x86_64/libPvAPI.a
 
