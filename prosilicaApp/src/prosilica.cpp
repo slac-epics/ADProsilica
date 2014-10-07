@@ -90,6 +90,8 @@ protected:
     int PSResetTimer;
     int PSFrameRate;
     int PSByteRate;
+    int PSResendLookback;
+    int PSResendRetries;
     int PSPacketSize;
     int PSFramesCompleted;
     int PSFramesDropped;
@@ -264,6 +266,8 @@ static const char *PSStrobeModes[] = {
 #define PSResetTimerString           "PS_RESET_TIMER"          /* (asynInt32,    n/a) Software timer reset/sync */
 #define PSFrameRateString            "PS_FRAME_RATE"           /* (asynFloat64,  r/o) Frame rate */ 
 #define PSByteRateString             "PS_BYTE_RATE"            /* (asynInt32,    r/w) Stream bytes per second */ 
+#define PSResendLookbackString       "PS_RESEND_LOOKBACK"      /* (asynInt32,    r/w) How long to wait for missing pkts */
+#define PSResendRetriesString        "PS_RESEND_RETRIES"       /* (asynInt32,    r/w) How many retries for missing packets */ 
 #define PSPacketSizeString           "PS_PACKET_SIZE"          /* (asynInt32,    r/o) Packet size */ 
 #define PSFramesCompletedString      "PS_FRAMES_COMPLETED"     /* (asynInt32,    r/o) Frames completed */ 
 #define PSFramesDroppedString        "PS_FRAMES_DROPPED"       /* (asynInt32,    r/o) Frames dropped */ 
@@ -348,7 +352,8 @@ prosilica::~prosilica() {
 
 
 // Changes the connection status of the camera based on information from the AVT library
-void PVDECL  prosilica::cameraLinkCallback(void *Context, tPvInterface Interface, tPvLinkEvent Event, unsigned long UniqueId ) {
+void PVDECL  prosilica::cameraLinkCallback(void *Context, tPvInterface Interface, tPvLinkEvent Event, unsigned long UniqueId )
+{
     asynStatus status = asynSuccess;
     int found=0;
     unsigned long uniqueIP=0;
@@ -411,15 +416,13 @@ void PVDECL  prosilica::cameraLinkCallback(void *Context, tPvInterface Interface
 
 
 /* From asynPortDriver: Connects driver to device; */
-asynStatus prosilica::connect(asynUser* pasynUser) {
-
+asynStatus prosilica::connect( asynUser* pasynUser ) {
     return connectCamera();
 }
 
 
 /* From asynPortDriver: Disconnects driver from device; */
-asynStatus prosilica::disconnect(asynUser* pasynUser) {
-
+asynStatus prosilica::disconnect( asynUser* pasynUser ) {
     return disconnectCamera();
 }
 
@@ -716,8 +719,10 @@ void prosilica::frameCallback(tPvFrame *pFrame)
         const double native_frame_ticks =  ((double)pFrame->TimestampLo + (double)pFrame->TimestampHi*4294967296.);
 
         /* Determine how to set the timeStamp */
-        PSTimestampType_t timestamp_type = PSTimestampTypeNativeTicks;
-        getIntegerParam(PSTimestampType, (int*)&timestamp_type);
+        PSTimestampType_t	timestamp_type = PSTimestampTypeNativeTicks;
+		int					intParam	= timestamp_type;
+        getIntegerParam(PSTimestampType, &intParam );
+		timestamp_type = static_cast<PSTimestampType_t>(intParam);
 
         switch (timestamp_type) {
             case PSTimestampTypeNativeTicks:
@@ -951,6 +956,10 @@ asynStatus prosilica::readStats()
     status |= setDoubleParam (PSFrameRate, fval);
     status |= PvAttrUint32Get    (this->PvHandle, "StreamBytesPerSecond", &uval);
     status |= setIntegerParam(PSByteRate, (int)uval);
+    status |= PvAttrUint32Get    (this->PvHandle, "GvspLookbackWindow", &uval);
+    status |= setIntegerParam(PSResendLookback, (int)uval);
+    status |= PvAttrUint32Get    (this->PvHandle, "GvspRetries", &uval);
+    status |= setIntegerParam(PSResendRetries, (int)uval);
     status |= PvAttrUint32Get    (this->PvHandle, "PacketSize", &uval);
     status |= setIntegerParam(PSPacketSize, (int)uval);
     status |= PvAttrUint32Get    (this->PvHandle, "StatFramesCompleted", &uval);
@@ -1355,7 +1364,7 @@ asynStatus prosilica::connectCamera()
               "%s:%s: Cannot get control of camera %lu, access flags=%lx\n", 
                driverName, functionName, this->uniqueId, this->PvCameraInfo.PermittedAccess);
         return asynError;
-    }
+	}
 
     if (isUniqueId)
       status = PvCameraOpen(this->uniqueId, ePvAccessMaster, &this->PvHandle);
@@ -1490,7 +1499,7 @@ asynStatus prosilica::connectCamera()
         return asynError;
     }
     asynPrint(this->pasynUserSelf, ASYN_TRACE_FLOW, 
-        "%s:%s: Camera connected; unique id: %ld\n", 
+        "%s:%s: Camera connected successfully!; unique id: %ld\n", 
         driverName, functionName, this->uniqueId);
     return asynSuccess;
 }
@@ -1570,6 +1579,10 @@ asynStatus prosilica::writeInt32(asynUser *pasynUser, epicsInt32 value)
         }
     } else if (function == PSByteRate) {
             status |= PvAttrUint32Set(this->PvHandle, "StreamBytesPerSecond", value);
+    } else if (function == PSResendLookback) {
+            status |= PvAttrUint32Set(this->PvHandle, "GvspLookbackWindow", value);
+    } else if (function == PSResendRetries) {
+            status |= PvAttrUint32Set(this->PvHandle, "GvspRetries", value);
     } else if (function == PSReadStatistics) {
             readStats();
     } else if (function == PSTriggerEvent) {
@@ -1792,6 +1805,8 @@ prosilica::prosilica(const char *portName, const char *cameraId, int maxBuffers,
     createParam(PSResetTimerString,        asynParamInt32,    &PSResetTimer);
     createParam(PSFrameRateString,         asynParamFloat64,  &PSFrameRate);
     createParam(PSByteRateString,          asynParamInt32,    &PSByteRate);
+    createParam(PSResendLookbackString,    asynParamInt32,    &PSResendLookback);
+    createParam(PSResendRetriesString,     asynParamInt32,    &PSResendRetries);
     createParam(PSPacketSizeString,        asynParamInt32,    &PSPacketSize);
     createParam(PSFramesCompletedString,   asynParamInt32,    &PSFramesCompleted);
     createParam(PSFramesDroppedString,     asynParamInt32,    &PSFramesDropped);
@@ -1855,11 +1870,11 @@ prosilica::prosilica(const char *portName, const char *cameraId, int maxBuffers,
         PvApiInitialized = 1;
     }
 
-    /* Need to wait a short while for the PvAPI library to find the cameras */
-    /* (0.2 seconds is not long enough in 1.24) */
-    epicsThreadSleep(1.0);
- 
     if ( this->PvHandle == NULL ) {
+        /* Need to wait a short while for the PvAPI library to find the cameras */
+        /* (0.2 seconds is not long enough in 1.24) */
+        epicsThreadSleep(1.0);
+
         /* Try to connect to the camera.  
          * It is not a fatal error if we cannot now, the camera may be off or owned by
          * someone else.  It may connect later. */
