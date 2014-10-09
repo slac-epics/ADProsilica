@@ -128,6 +128,42 @@ record(mbbi, "$(P)$(R)ColorMode_RBV")
    field(SXVL, "")
    field(SVST, "")
    field(SVVL, "")
+   field(UNSV, "INVALID")
+}
+
+# The following records are specific to the Prosilica
+
+###############################################################################
+#  Bayer color conversion                                                     # 
+###############################################################################
+record(mbbo, "$(P)$(R)BayerConvert")
+{
+   field(DTYP, "asynInt32")
+   field(OUT,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))PS_BAYER_CONVERT")
+   field(PINI, "YES")
+   field(ZRST, "None")
+   field(ZRVL, "0")
+   field(ONST, "RGB1")
+   field(ONVL, "1")
+   field(TWST, "RGB2")
+   field(TWVL, "2")
+   field(THST, "RGB3")
+   field(THVL, "3")
+}
+
+record(mbbi, "$(P)$(R)BayerConvert_RBV")
+{
+   field(DTYP, "asynInt32")
+   field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))PS_BAYER_CONVERT")
+   field(ZRST, "None")
+   field(ZRVL, "0")
+   field(ONST, "RGB1")
+   field(ONVL, "1")
+   field(TWST, "RGB2")
+   field(TWVL, "2")
+   field(THST, "RGB3")
+   field(THVL, "3")
+   field(SCAN, "I/O Intr")
 }
 
 record(ao, "$(P)$(R)Gain")
@@ -143,8 +179,6 @@ record(ao, "$(P)$(R)Gain")
    field(PREC, "3")
 }
 
-# The following records are specific to the Prosilica
-
 ###############################################################################
 #  These records are for network and frame statistics                         #
 ###############################################################################
@@ -153,8 +187,10 @@ record(longout, "$(P)$(R)PSReadStatistics")
    field(DTYP, "asynInt32")
    field(OUT,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))PS_READ_STATISTICS")
    field(SCAN, "5 second")
+   field(DISS, "INVALID" )
    field(DISV, "0" )
    field(SDIS, "$(P)$(R)AsynIO.CNCT" )
+   field(PINI, "YES" )
 }
 
 record(stringin, "$(P)$(R)PSDriverType_RBV")
@@ -1049,6 +1085,6 @@ record(longout, "$(P)$(R)PSResetTimer")
 {
    field(DTYP, "asynInt32")
    field(OUT,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))PS_RESET_TIMER")
-   field(SCAN, "$(TRSCAN)")
+   field(SCAN, "$(TRSCAN=Passive)")
 }
 

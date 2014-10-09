@@ -426,11 +426,20 @@ static void PVDECL frameCallbackC(tPvFrame *pFrame)
 /** Sync the camera time with an EPICS timestamp */
 asynStatus prosilica::syncTimer() {
 
-    //static const char *functionName = "syncTimer";
+    static const char *functionName = "syncTimer";
     if (this->PvHandle) {
         epicsTimeGetCurrent(&lastSyncTime);
         // Tell the camera to reset its internal clock
         PvCommandRun(this->PvHandle, "TimeStampReset");
+
+		if ( pasynTrace->getTraceMask(this->pasynUserSelf) & ASYN_TRACE_FLOW )
+		{
+			char	strTime[40];
+			epicsTimeToStrftime( strTime, 40, "%H:%M:%09f", &lastSyncTime );
+			asynPrint(this->pasynUserSelf, ASYN_TRACE_FLOW, 
+				"%s:%s: Updating camera timeStamp to %s\n",
+				driverName, functionName, strTime );
+		}
         return asynSuccess;
     }
     else {
@@ -450,8 +459,9 @@ void prosilica::frameCallback(tPvFrame *pFrame)
     NDArray *pTempImage;
     int binX, binY;
     int badFrameCounter;
-    int bayerConvert;
-    epicsInt32 bayerPattern, colorMode;
+    int bayerConvert = PSBayerConvertNone;
+    epicsInt32 bayerPattern;
+    epicsInt32 colorMode	= NDColorModeMono;
     static const char *functionName = "frameCallback";
 
     /* If this callback is coming from a shutdown operation rather than normal collection, 
@@ -478,6 +488,11 @@ void prosilica::frameCallback(tPvFrame *pFrame)
         if (pFrame->BayerPattern > ePvBayerBGGR) pFrame->BayerPattern = ePvBayerRGGB;
         bayerPattern = pFrame->BayerPattern;
         getIntegerParam(PSBayerConvert, &bayerConvert);
+
+        asynPrint(this->pasynUserSelf, ASYN_TRACE_FLOW, 
+            "%s:%s: Rcvd frame, Format=%d, %lu x %lu\n",
+            driverName, functionName, pFrame->Format,
+			pFrame->Width, pFrame->Height	);
 
         switch(pFrame->Format) {
             case ePvFmtMono8:
@@ -524,6 +539,11 @@ void prosilica::frameCallback(tPvFrame *pFrame)
                     pImage = this->pNDArrayPool->alloc(ndims, dims, NDUInt8, this->maxFrameSize, NULL);
                     epicsUInt8 *pData = (epicsUInt8 *)pImage->pData;
                     switch (bayerConvert) {
+						default:
+							asynPrint(this->pasynUserSelf, ASYN_TRACE_ERROR, 
+								"%s:%s: error unsupported bayerConvert value %d\n", 
+								driverName, functionName, bayerConvert );
+							break;
                         case PSBayerConvertRGB1: {
                             PvUtilityColorInterpolate(pFrame, pData, pData+1, pData+2, 2, 0);
                             colorMode = NDColorModeRGB1;
@@ -600,6 +620,11 @@ void prosilica::frameCallback(tPvFrame *pFrame)
                     epicsUInt16 *pData = (epicsUInt16 *)pImage->pData;
 
                     switch (bayerConvert) {
+						default:
+							asynPrint(this->pasynUserSelf, ASYN_TRACE_ERROR, 
+								"%s:%s: error unsupported bayerConvert value %d\n", 
+								driverName, functionName, bayerConvert );
+							break;
                         case PSBayerConvertRGB1: {
                             PvUtilityColorInterpolate(pFrame, pData, pData+1, pData+2, 2, 0);
                             colorMode = NDColorModeRGB1;
@@ -919,7 +944,11 @@ asynStatus prosilica::readStats()
     int i;
     float fval;
     static const char *functionName = "readStats";
-    
+
+	asynPrint(this->pasynUserSelf, ASYN_TRACE_FLOW, 
+		"%s:%s: Updating network statistics ...\n",
+		driverName, functionName );
+   
     status |= PvAttrEnumGet      (this->PvHandle, "StatDriverType", buffer, sizeof(buffer), &nchars);
     if (status == ePvErrNotFound) {
         status = 0;
@@ -1476,13 +1505,25 @@ asynStatus prosilica::connectCamera()
 asynStatus prosilica::writeInt32(asynUser *pasynUser, epicsInt32 value)
 {
     int function = pasynUser->reason;
+    const char *paramName;
+    getParamName(function, &paramName);
     int status = asynSuccess;
     tPvUint32 syncs;
     static const char *functionName = "writeInt32";
 
     /* Set the parameter and readback in the parameter library.  This may be overwritten when we read back the
      * status at the end, but that's OK */
-    status |= setIntegerParam(function, value);
+    if (	function == PSReadStatistics
+		||	function == PSResetTimer		) {
+		// Don't bother setting the param lib on these as they're
+		// processed in scan loops just to invoke their functions
+		// and we don't want the chatter on ASYN_TRACEIO_DEVICE
+		// Turn on ASYN_TRACE_FLOW to see when they run
+    	status = asynSuccess;
+	}
+	else {
+    	status |= setIntegerParam(function, value);
+	}
 
     if ((function == ADBinX) ||
         (function == ADBinX) ||
@@ -1594,17 +1635,17 @@ asynStatus prosilica::writeInt32(asynUser *pasynUser, epicsInt32 value)
             /* If this is not a parameter we have handled call the base class */
             if (function < FIRST_PS_PARAM) status = ADDriver::writeInt32(pasynUser, value);
     }
-    
+ 
     /* Read the camera parameters and do callbacks */
     status |= readParameters();    
     if (status) 
         asynPrint(pasynUser, ASYN_TRACE_ERROR, 
               "%s:%s: error, status=%d function=%d, value=%d\n", 
               driverName, functionName, status, function, value);
-    else        
-        asynPrint(pasynUser, ASYN_TRACEIO_DRIVER, 
-              "%s:%s: function=%d, value=%d\n", 
-              driverName, functionName, function, value);
+    else
+        asynPrint(pasynUser, ASYN_TRACE_FLOW, 
+              "%s:%s: function=%d, name=%s, value=%d\n", 
+              driverName, functionName, function, paramName, value );
     return((asynStatus)status);
 }
 
@@ -1656,7 +1697,7 @@ asynStatus prosilica::writeFloat64(asynUser *pasynUser, epicsFloat64 value)
               "%s:%s: error, status=%d function=%d, name=%s, value=%f\n", 
               driverName, functionName, status, function, paramName, value);
     else        
-        asynPrint(pasynUser, ASYN_TRACEIO_DRIVER, 
+        asynPrint(pasynUser, ASYN_TRACE_FLOW, 
               "%s:%s: function=%d, name=%s, value=%f\n", 
               driverName, functionName, function, paramName, value);
     return((asynStatus)status);
@@ -1731,9 +1772,9 @@ extern "C" int prosilicaConfig(char *portName, /* Port name */
   * \param[in] portName The name of the asyn port driver to be created.
   * \param[in] cameraId The uniqueId, IP address or IP DNS name  of the camera to be connected to this driver.
   * \param[in] maxBuffers The maximum number of NDArray buffers that the NDArrayPool for this driver is 
-  *            allowed to allocate. Set this to -1 to allow an unlimited number of buffers.
+  *            allowed to allocate. Set this to 0 to allow an unlimited number of buffers.
   * \param[in] maxMemory The maximum amount of memory that the NDArrayPool for this driver is 
-  *            allowed to allocate. Set this to -1 to allow an unlimited amount of memory.
+  *            allowed to allocate. Set this to 0 to allow an unlimited amount of memory.
   * \param[in] priority The thread priority for the asyn port driver thread if ASYN_CANBLOCK is set in asynFlags.
   * \param[in] stackSize The stack size for the asyn port driver thread if ASYN_CANBLOCK is set in asynFlags.
   * \param[in] maxPvAPIFrames The number of frame buffers to use in the PvAPI library driver. Default=MAX_PVAPI_FRAMES=2.
