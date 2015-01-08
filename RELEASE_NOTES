@@ -1,4 +1,15 @@
 
 ADProsilica-R2-0_1-0:  Initial RELEASE for ICD: Prosilica Gig-E Camera: (Developed by Mark Rivers, Univ of Chicago))
+                       -- ELW: Add config files to point to the location of SZIP and HDF
+                          within the buildroot linuxRT OS and toolchain:
+                          added <>/configure/CONFIG_SITE.Common.linuxRT-x86
+                          added <>/configure/CONFIG_SITE.Common.linuxRT-x86_64
+                        -- ELW: Install vendor library and header for use by linuxRT
+                                Note the vendor library was probably built with glibc
+                                Our linuxRT targets use uClibc.  I hope this is okay
+                                I copied the venors x86_64 bit library to the 
+                                linuxRT-x86_64 directory and similar for the 32-bit
+                                vendor library.
+                                Note: Would be nice if we had the vendor's source code. :)
                  
 
