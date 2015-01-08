@@ -28,6 +28,12 @@ LIB_INSTALLS_Linux += ../os/linux-x86_64/libPvAPI.a
 else ifeq (linux-x86, $(findstring linux-x86, $(T_A)))
 LIB_INSTALLS_Linux += ../os/linux-x86/libPvAPI.a
 
+else ifeq (linuxRT-x86_64, $(findstring linuxRT-x86_64, $(T_A)))
+LIB_INSTALLS_Linux += ../os/linuxRT-x86_64/libPvAPI.a
+
+else ifeq (linuxRT-x86, $(findstring linuxRT-x86, $(T_A)))
+LIB_INSTALLS_Linux += ../os/linuxRT-x86/libPvAPI.a
+
 else ifeq (darwin-x86, $(findstring darwin-x86, $(T_A)))
 LIB_INSTALLS_Darwin += ../os/darwin-x86/libPvAPI.a
 endif
