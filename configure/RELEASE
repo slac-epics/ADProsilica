@@ -13,7 +13,6 @@ include $(TOP)/RELEASE_SITE
 
 # RELEASE
 # Defines location of external products
-include $(TOP)/RELEASE_SITE
 
 # ===============================================================
 # Define the location and version of EPICS base
