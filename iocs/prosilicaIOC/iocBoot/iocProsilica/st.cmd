@@ -10,6 +10,7 @@ epicsEnvSet("QSIZE",  "20")
 epicsEnvSet("XSIZE",  "1360")
 epicsEnvSet("YSIZE",  "1024")
 epicsEnvSet("NCHANS", "2048")
+epicsEnvSet("EPICS_CA_MAX_ARRAY_BYTES", "10000000")
 
 # prosilicaConfig(portName,    # The name of the asyn port to be created
 #                 cameraId,    # Unique ID, IP address, or IP name of the camera
@@ -21,9 +22,9 @@ epicsEnvSet("NCHANS", "2048")
 # The simplest way to determine the uniqueId of a camera is to run the Prosilica GigEViewer application, 
 # select the camera, and press the "i" icon on the bottom of the main window to show the camera information for this camera. 
 # The Unique ID will be displayed on the first line in the information window.
-prosilicaConfig("$(PORT)", 51031, 50, 0, 0, 0, 10)
+#prosilicaConfig("$(PORT)", 51031, 50, 0, 0, 0, 10)
 #prosilicaConfig("$(PORT)", 50022, 50, 0)
-#prosilicaConfig("$(PORT)", 164.54.160.203, 50, 0)
+prosilicaConfig("$(PORT)", 169.254.97.186, 50, 0)
 #prosilicaConfig("$(PORT)", 51039, 50, 0)
 
 asynSetTraceIOMask("$(PORT)",0,2)
@@ -40,11 +41,11 @@ dbLoadRecords("$(ADCORE)/db/NDPluginBase.template","P=$(PREFIX),R=image1:,PORT=I
 # Use this line if you only want to use the Prosilica in 8-bit mode.  It uses an 8-bit waveform record
 # NELEMENTS is set large enough for a 1360x1024x3 image size, which is the number of pixels in RGB images from the GC1380CH color camera. 
 # Must be at least as big as the maximum size of your camera images
-dbLoadRecords("$(ADCORE)/db/NDStdArrays.template", "P=$(PREFIX),R=image1:,PORT=Image1,ADDR=0,TIMEOUT=1,TYPE=Int8,FTVL=UCHAR,NELEMENTS=4177920")
+#dbLoadRecords("$(ADCORE)/db/NDStdArrays.template", "P=$(PREFIX),R=image1:,PORT=Image1,ADDR=0,TIMEOUT=1,TYPE=Int8,FTVL=UCHAR,NELEMENTS=4177920")
 
 # Use this line if you want to use the Prosilica in 8,12 or 16-bit modes.  
 # It uses an 16-bit waveform record, so it uses twice the memory and bandwidth required for only 8-bit data.
-#dbLoadRecords("$(ADCORE)/db/NDStdArrays.template", "P=$(PREFIX),R=image1:,PORT=Image1,ADDR=0,TIMEOUT=1,TYPE=Int16,FTVL=SHORT,NELEMENTS=4177920")
+dbLoadRecords("$(ADCORE)/db/NDStdArrays.template", "P=$(PREFIX),R=image1:,PORT=Image1,ADDR=0,TIMEOUT=1,TYPE=Int16,FTVL=SHORT,NELEMENTS=4177920")
 
 # Load all other plugins using commonPlugins.cmd
 < $(ADCORE)/iocBoot/commonPlugins.cmd
