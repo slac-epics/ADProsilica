@@ -4,6 +4,7 @@ include $(TOP)/configure/CONFIG
 #ARCH = windows-x64-dynamic
 #ARCH = windows-x64
 #ARCH = linux-x86
-ARCH = linux-x86_64
+#ARCH = linux-x86_64
+ARCH = linuxRT_glibc-x86_64
 TARGETS = envPaths dllPath.bat
 include $(TOP)/configure/RULES.ioc

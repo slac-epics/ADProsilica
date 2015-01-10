@@ -1,0 +1,2 @@
+#medm -x -macro "P=13PS1:, R=cam1:" prosilica.adl &
+../../bin/linuxRT_glibc-x86_64/prosilicaApp st.cmd.linux
