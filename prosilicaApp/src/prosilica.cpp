@@ -432,14 +432,14 @@ asynStatus prosilica::syncTimer() {
         // Tell the camera to reset its internal clock
         PvCommandRun(this->PvHandle, "TimeStampReset");
 
-		if ( pasynTrace->getTraceMask(this->pasynUserSelf) & ASYN_TRACE_FLOW )
-		{
-			char	strTime[40];
-			epicsTimeToStrftime( strTime, 40, "%H:%M:%09f", &lastSyncTime );
-			asynPrint(this->pasynUserSelf, ASYN_TRACE_FLOW, 
-				"%s:%s: Updating camera timeStamp to %s\n",
-				driverName, functionName, strTime );
-		}
+        if ( pasynTrace->getTraceMask(this->pasynUserSelf) & ASYN_TRACE_FLOW )
+        {
+            char    strTime[40];
+            epicsTimeToStrftime( strTime, 40, "%H:%M:%09f", &lastSyncTime );
+            asynPrint(this->pasynUserSelf, ASYN_TRACE_FLOW, 
+                "%s:%s: Updating camera timeStamp to %s\n",
+                driverName, functionName, strTime );
+        }
         return asynSuccess;
     }
     else {
@@ -458,12 +458,12 @@ void prosilica::frameCallback(tPvFrame *pFrame)
     NDArray *pImage;
     NDArray *pTempImage;
     int binX, binY;
-    int bitsPerPixel	= 8;
-	int	bytesPerPixel	= 1;
+    int bitsPerPixel    = 8;
+    int bytesPerPixel   = 1;
     int badFrameCounter;
     int bayerConvert = PSBayerConvertNone;
     epicsInt32 bayerPattern;
-    epicsInt32 colorMode	= NDColorModeMono;
+    epicsInt32 colorMode    = NDColorModeMono;
     static const char *functionName = "frameCallback";
 
     /* If this callback is coming from a shutdown operation rather than normal collection, 
@@ -494,14 +494,14 @@ void prosilica::frameCallback(tPvFrame *pFrame)
         asynPrint(this->pasynUserSelf, ASYN_TRACE_FLOW, 
             "%s:%s: Rcvd frame, Format=%d, %lu x %lu\n",
             driverName, functionName, pFrame->Format,
-			pFrame->Width, pFrame->Height	);
+            pFrame->Width, pFrame->Height   );
 
         switch(pFrame->Format) {
             case ePvFmtMono8:
                 colorMode = NDColorModeMono;
                 pImage->dataType = NDUInt8;
-				bitsPerPixel	= 8;
-				bytesPerPixel	= 1;
+                bitsPerPixel    = 8;
+                bytesPerPixel   = 1;
                 pImage->ndims = 2;
                 pImage->dims[0].size    = pFrame->Width;
                 pImage->dims[0].offset  = pFrame->RegionX;
@@ -514,8 +514,8 @@ void prosilica::frameCallback(tPvFrame *pFrame)
             case ePvFmtMono16:
                 colorMode = NDColorModeMono;
                 pImage->dataType = NDUInt16;
-				bitsPerPixel	= 16;
-				bytesPerPixel	= 2;
+                bitsPerPixel    = 16;
+                bytesPerPixel   = 2;
                 pImage->ndims = 2;
                 pImage->dims[0].size    = pFrame->Width;
                 pImage->dims[0].offset  = pFrame->RegionX;
@@ -529,8 +529,8 @@ void prosilica::frameCallback(tPvFrame *pFrame)
                 if (bayerConvert == PSBayerConvertNone) {
                     colorMode = NDColorModeBayer;
                     pImage->dataType = NDUInt8;
-					bitsPerPixel	= 8;
-					bytesPerPixel	= 1;
+                    bitsPerPixel    = 8;
+                    bytesPerPixel   = 1;
                     pImage->ndims = 2;
                     pImage->dims[0].size   = pFrame->Width;
                     pImage->dims[0].offset = pFrame->RegionX;
@@ -547,17 +547,17 @@ void prosilica::frameCallback(tPvFrame *pFrame)
                     pImage = this->pNDArrayPool->alloc(ndims, dims, NDUInt8, this->maxFrameSize, NULL);
                     epicsUInt8 *pData = (epicsUInt8 *)pImage->pData;
                     switch (bayerConvert) {
-						default:
-							asynPrint(this->pasynUserSelf, ASYN_TRACE_ERROR, 
-								"%s:%s: error unsupported bayerConvert value %d\n", 
-								driverName, functionName, bayerConvert );
-							break;
+                        default:
+                            asynPrint(this->pasynUserSelf, ASYN_TRACE_ERROR, 
+                                "%s:%s: error unsupported bayerConvert value %d\n", 
+                                driverName, functionName, bayerConvert );
+                            break;
                         case PSBayerConvertRGB1: {
                             PvUtilityColorInterpolate(pFrame, pData, pData+1, pData+2, 2, 0);
                             colorMode = NDColorModeRGB1;
                             pImage->ndims = 3;
-							bitsPerPixel	= 8;
-							bytesPerPixel	= 1;
+                            bitsPerPixel    = 8;
+                            bytesPerPixel   = 1;
                             pImage->dims[0].size    = 3;
                             pImage->dims[0].offset  = 0;
                             pImage->dims[0].binning = 1;
@@ -576,8 +576,8 @@ void prosilica::frameCallback(tPvFrame *pFrame)
                                                       0, (unsigned long)(2*rowSize));
                             colorMode = NDColorModeRGB2;
                             pImage->ndims = 3;
-							bitsPerPixel	= 8;
-							bytesPerPixel	= 1;
+                            bitsPerPixel    = 8;
+                            bytesPerPixel   = 1;
                             pImage->dims[0].size   = pFrame->Width;
                             pImage->dims[0].offset = pFrame->RegionX;
                             pImage->dims[0].binning = binX;
@@ -595,8 +595,8 @@ void prosilica::frameCallback(tPvFrame *pFrame)
                             PvUtilityColorInterpolate(pFrame, pData,  pData+imageSize, pData+2*imageSize, 0, 0);
                             colorMode = NDColorModeRGB3;
                             pImage->ndims = 3;
-							bitsPerPixel	= 8;
-							bytesPerPixel	= 1;
+                            bitsPerPixel    = 8;
+                            bytesPerPixel   = 1;
                             pImage->dims[0].size   = pFrame->Width;
                             pImage->dims[0].offset = pFrame->RegionX;
                             pImage->dims[0].binning = binX;
@@ -618,8 +618,8 @@ void prosilica::frameCallback(tPvFrame *pFrame)
                     colorMode = NDColorModeBayer;
                     pImage->dataType = NDUInt16;
                     pImage->ndims = 2;
-					bitsPerPixel	= 16;
-					bytesPerPixel	= 2;
+                    bitsPerPixel    = 16;
+                    bytesPerPixel   = 2;
                     pImage->dims[0].size    = pFrame->Width;
                     pImage->dims[0].offset  = pFrame->RegionX;
                     pImage->dims[0].binning = binX;
@@ -636,17 +636,17 @@ void prosilica::frameCallback(tPvFrame *pFrame)
                     epicsUInt16 *pData = (epicsUInt16 *)pImage->pData;
 
                     switch (bayerConvert) {
-						default:
-							asynPrint(this->pasynUserSelf, ASYN_TRACE_ERROR, 
-								"%s:%s: error unsupported bayerConvert value %d\n", 
-								driverName, functionName, bayerConvert );
-							break;
+                        default:
+                            asynPrint(this->pasynUserSelf, ASYN_TRACE_ERROR, 
+                                "%s:%s: error unsupported bayerConvert value %d\n", 
+                                driverName, functionName, bayerConvert );
+                            break;
                         case PSBayerConvertRGB1: {
                             PvUtilityColorInterpolate(pFrame, pData, pData+1, pData+2, 2, 0);
                             colorMode = NDColorModeRGB1;
                             pImage->ndims = 3;
-							bitsPerPixel	= 8;
-							bytesPerPixel	= 1;
+                            bitsPerPixel    = 8;
+                            bytesPerPixel   = 1;
                             pImage->dims[0].size    = 3;
                             pImage->dims[0].offset  = 0;
                             pImage->dims[0].binning = 1;
@@ -665,8 +665,8 @@ void prosilica::frameCallback(tPvFrame *pFrame)
                                                       0, (unsigned long)(2*rowSize));
                             colorMode = NDColorModeRGB2;
                             pImage->ndims = 3;
-							bitsPerPixel	= 8;
-							bytesPerPixel	= 1;
+                            bitsPerPixel    = 8;
+                            bytesPerPixel   = 1;
                             pImage->dims[0].size   = pFrame->Width;
                             pImage->dims[0].offset = pFrame->RegionX;
                             pImage->dims[0].binning = binX;
@@ -684,8 +684,8 @@ void prosilica::frameCallback(tPvFrame *pFrame)
                             PvUtilityColorInterpolate(pFrame, pData,  pData+imageSize, pData+2*imageSize, 0, 0);
                             colorMode = NDColorModeRGB3;
                             pImage->ndims = 3;
-							bitsPerPixel	= 8;
-							bytesPerPixel	= 1;
+                            bitsPerPixel    = 8;
+                            bytesPerPixel   = 1;
                             pImage->dims[0].size   = pFrame->Width;
                             pImage->dims[0].offset = pFrame->RegionX;
                             pImage->dims[0].binning = binX;
@@ -706,8 +706,8 @@ void prosilica::frameCallback(tPvFrame *pFrame)
                 colorMode = NDColorModeRGB1;
                 pImage->dataType = NDUInt8;
                 pImage->ndims = 3;
-				bitsPerPixel	= 8;
-				bytesPerPixel	= 1;
+                bitsPerPixel    = 8;
+                bytesPerPixel   = 1;
                 pImage->dims[0].size    = 3;
                 pImage->dims[0].offset  = 0;
                 pImage->dims[0].binning = 1;
@@ -723,8 +723,8 @@ void prosilica::frameCallback(tPvFrame *pFrame)
                 colorMode = NDColorModeRGB1;
                 pImage->dataType = NDUInt16;
                 pImage->ndims = 3;
-				bitsPerPixel	= 16;
-				bytesPerPixel	= 2;
+                bitsPerPixel    = 16;
+                bytesPerPixel   = 2;
                 pImage->dims[0].size    = 3;
                 pImage->dims[0].offset  = 0;
                 pImage->dims[0].binning = 1;
@@ -746,8 +746,8 @@ void prosilica::frameCallback(tPvFrame *pFrame)
         pImage->pAttributeList->add("BayerPattern", "Bayer Pattern", NDAttrInt32, &bayerPattern);
         pImage->pAttributeList->add("ColorMode", "Color Mode", NDAttrInt32, &colorMode);
 
-		setIntegerParam( NDBitsPerPixel,  bitsPerPixel  );
-		setIntegerParam( NDBytesPerPixel, bytesPerPixel );
+        setIntegerParam( NDBitsPerPixel,  bitsPerPixel  );
+        setIntegerParam( NDBytesPerPixel, bytesPerPixel );
 
         /* Set the uniqueId and time stamp */
         pImage->uniqueId = pFrame->FrameCount;
@@ -755,10 +755,10 @@ void prosilica::frameCallback(tPvFrame *pFrame)
         const double native_frame_ticks =  ((double)pFrame->TimestampLo + (double)pFrame->TimestampHi*4294967296.);
 
         /* Determine how to set the timeStamp */
-        PSTimestampType_t	timestamp_type = PSTimestampTypeNativeTicks;
-		int					intParam	= timestamp_type;
+        PSTimestampType_t   timestamp_type = PSTimestampTypeNativeTicks;
+        int                 intParam    = timestamp_type;
         getIntegerParam(PSTimestampType, &intParam );
-		timestamp_type = static_cast<PSTimestampType_t>(intParam);
+        timestamp_type = static_cast<PSTimestampType_t>(intParam);
 
         switch (timestamp_type) {
             case PSTimestampTypeNativeTicks:
@@ -974,9 +974,9 @@ asynStatus prosilica::readStats()
     float fval;
     static const char *functionName = "readStats";
 
-	asynPrint(this->pasynUserSelf, ASYN_TRACE_FLOW, 
-		"%s:%s: Updating network statistics ...\n",
-		driverName, functionName );
+    asynPrint(this->pasynUserSelf, ASYN_TRACE_FLOW, 
+        "%s:%s: Updating network statistics ...\n",
+        driverName, functionName );
    
     status |= PvAttrEnumGet      (this->PvHandle, "StatDriverType", buffer, sizeof(buffer), &nchars);
     if (status == ePvErrNotFound) {
@@ -1371,17 +1371,17 @@ asynStatus prosilica::connectCamera()
         this->uniqueId = this->PvCameraInfo.UniqueId;
     }
 
-	// Here's where reconnect fails.
-	// PermittedAccess flags are 0x0002 for around 5 seconds after
-	// a hard IOC restart which didn't call disconnectCamera()
-	unsigned retryCount = 0;
-	while ( (this->PvCameraInfo.PermittedAccess & ePvAccessMaster) == 0 ) {
-		asynPrint(this->pasynUserSelf, ASYN_TRACE_FLOW, 
-			  "%s:%s: No RW access for camera %lu, retrying ...\n", 
-			  driverName, functionName, this->uniqueId);
+    // Here's where reconnect fails.
+    // PermittedAccess flags are 0x0002 for around 5 seconds after
+    // a hard IOC restart which didn't call disconnectCamera()
+    unsigned retryCount = 0;
+    while ( (this->PvCameraInfo.PermittedAccess & ePvAccessMaster) == 0 ) {
+        asynPrint(this->pasynUserSelf, ASYN_TRACE_FLOW, 
+              "%s:%s: No RW access for camera %lu, retrying ...\n", 
+              driverName, functionName, this->uniqueId);
 
-		// Wait a second and fetch status again
-		epicsThreadSleep(1);
+        // Wait a second and fetch status again
+        epicsThreadSleep(1);
         status = PvCameraInfoEx(this->uniqueId, &this->PvCameraInfo, sizeof(this->PvCameraInfo));
         if (status) {
             asynPrint(this->pasynUserSelf, ASYN_TRACE_ERROR, 
@@ -1389,15 +1389,15 @@ asynStatus prosilica::connectCamera()
                   driverName, functionName, this->uniqueId);
             return asynError;
         }
-		if ( ++retryCount >= 10 )
-			break;
+        if ( ++retryCount >= 10 )
+            break;
     }
     if ((this->PvCameraInfo.PermittedAccess & ePvAccessMaster) == 0) {
         asynPrint(this->pasynUserSelf, ASYN_TRACE_ERROR, 
               "%s:%s: Cannot get control of camera %lu, access flags=%lx\n", 
                driverName, functionName, this->uniqueId, this->PvCameraInfo.PermittedAccess);
         return asynError;
-	}
+    }
 
     if (isUniqueId)
       status = PvCameraOpen(this->uniqueId, ePvAccessMaster, &this->PvHandle);
@@ -1542,17 +1542,17 @@ asynStatus prosilica::writeInt32(asynUser *pasynUser, epicsInt32 value)
 
     /* Set the parameter and readback in the parameter library.  This may be overwritten when we read back the
      * status at the end, but that's OK */
-    if (	function == PSReadStatistics
-		||	function == PSResetTimer		) {
-		// Don't bother setting the param lib on these as they're
-		// processed in scan loops just to invoke their functions
-		// and we don't want the chatter on ASYN_TRACEIO_DEVICE
-		// Turn on ASYN_TRACE_FLOW to see when they run
-    	status = asynSuccess;
-	}
-	else {
-    	status |= setIntegerParam(function, value);
-	}
+    if (    function == PSReadStatistics
+        ||  function == PSResetTimer        ) {
+        // Don't bother setting the param lib on these as they're
+        // processed in scan loops just to invoke their functions
+        // and we don't want the chatter on ASYN_TRACEIO_DEVICE
+        // Turn on ASYN_TRACE_FLOW to see when they run
+        status = asynSuccess;
+    }
+    else {
+        status |= setIntegerParam(function, value);
+    }
 
     if ((function == ADBinX) ||
         (function == ADBinX) ||
@@ -1905,21 +1905,21 @@ prosilica::prosilica(const char *portName, const char *cameraId, int maxBuffers,
     }
     
     if ( this->PvHandle == NULL ) {
-		/* Need to wait a short while for the PvAPI library to find the cameras */
-		/* (0.2 seconds is not long enough in 1.24) */
-		epicsThreadSleep(1.0);
+        /* Need to wait a short while for the PvAPI library to find the cameras */
+        /* (0.2 seconds is not long enough in 1.24) */
+        epicsThreadSleep(1.0);
 
-		/* Try to connect to the camera.  
-		 * It is not a fatal error if we cannot now, the camera may be off or owned by
-		 * someone else.  It may connect later. */
-		this->lock();
-		status = connectCamera();
-		this->unlock();
-		if (status) {
-			printf("%s:%s: cannot connect to camera %s, manually connect when available.\n", 
-				   driverName, functionName, cameraId);
-		}
-	}
+        /* Try to connect to the camera.  
+         * It is not a fatal error if we cannot now, the camera may be off or owned by
+         * someone else.  It may connect later. */
+        this->lock();
+        status = connectCamera();
+        this->unlock();
+        if (status) {
+            printf("%s:%s: cannot connect to camera %s, manually connect when available.\n", 
+                   driverName, functionName, cameraId);
+        }
+    }
  
     /* Register the shutdown function for epicsAtExit */
     epicsAtExit(shutdown, (void*)this);
