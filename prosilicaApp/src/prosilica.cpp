@@ -1903,12 +1903,12 @@ prosilica::prosilica(const char *portName, const char *cameraId, int maxBuffers,
 
         PvApiInitialized = 1;
     }
-    
-    if ( this->PvHandle == NULL ) {
-        /* Need to wait a short while for the PvAPI library to find the cameras */
-        /* (0.2 seconds is not long enough in 1.24) */
-        epicsThreadSleep(1.0);
 
+    /* Need to wait a short while for the PvAPI library to find the cameras */
+    /* (0.2 seconds is not long enough in 1.24) */
+    epicsThreadSleep(1.0);
+
+    if ( this->PvHandle == NULL ) {
         /* Try to connect to the camera.  
          * It is not a fatal error if we cannot now, the camera may be off or owned by
          * someone else.  It may connect later. */
