@@ -747,6 +747,22 @@
       </tr>
       <tr>
         <td>
+          N/A</td>
+        <td>
+          N/A</td>
+        <td>
+          r/o</td>
+        <td>
+          Frames completed rate</td>
+        <td>
+          N/A</td>
+        <td>
+          $(P)$(R)PSFramesCompletedRate_RBV</td>
+        <td>
+          calc</td>
+      </tr>
+      <tr>
+        <td>
           PSStatFramesDropped</td>
         <td>
           asynInt32</td>
@@ -763,6 +779,22 @@
       </tr>
       <tr>
         <td>
+          N/A</td>
+        <td>
+          N/A</td>
+        <td>
+          r/o</td>
+        <td>
+          Dropped frame rate</td>
+        <td>
+          N/A</td>
+        <td>
+          $(P)$(R)PSFramesDroppedRate_RBV</td>
+        <td>
+          calc</td>
+      </tr>
+      <tr>
+        <td>
           PSStatPacketsErroneous</td>
         <td>
           asynInt32</td>
@@ -775,6 +807,67 @@
         <td>
           $(P)$(R)PSPacketsErroneous_RBV</td>
         <td>
+          longin</td>
+      </tr>
+      <tr>
+        <td>
+          N/A</td>
+        <td>
+          N/A</td>
+        <td>
+          r/o</td>
+        <td>
+          Erroneous packets rate</td>
+        <td>
+          N/A</td>
+        <td>
+          $(P)$(R)PSPacketsErroneousRate_RBV</td>
+        <td>
+          calc</td>
+      </tr>
+      <tr>
+        <td>
+          PSResendLookback</td>
+        <td>
+          asynInt32</td>
+        <td>
+          r/w</td>
+        <td>
+          GvspLookbackWindow - Size of look back window to determine if a packet is missing.
+		  Lower values allow the driver less time to handle out-of-order packets
+		  and may result in unnecessary resends.
+		  Higher values cause the driver to wait longer to issue resends but
+		  may result in dropped packets if the packet is no longer available.
+		</td>
+        <td>
+          PS_RESEND_LOOKBACK</td>
+        <td>
+          $(P)$(R)PSResendLookback<br />
+          $(P)$(R)PSResendLookback_RBV</td>
+        <td>
+          longout
+          <br />
+          longin</td>
+      </tr>
+      <tr>
+        <td>
+          PSResendRetries</td>
+        <td>
+          asynInt32</td>
+        <td>
+          r/w</td>
+        <td>
+          GvcpRetries - The maximum number of resend requests
+		  that the host will attempt when trying to recover a lost control packet.
+		</td>
+        <td>
+          PS_RESEND_RETRIES</td>
+        <td>
+          $(P)$(R)PSResendRetries<br />
+          $(P)$(R)PSResendRetries_RBV</td>
+        <td>
+          longout
+          <br />
           longin</td>
       </tr>
       <tr>
@@ -795,6 +888,22 @@
       </tr>
       <tr>
         <td>
+          N/A</td>
+        <td>
+          N/A</td>
+        <td>
+          r/o</td>
+        <td>
+          Missed Packets rate</td>
+        <td>
+          N/A</td>
+        <td>
+          $(P)$(R)PSPacketsMissedRate_RBV</td>
+        <td>
+          calc</td>
+      </tr>
+      <tr>
+        <td>
           PSStatPacketsReceived</td>
         <td>
           asynInt32</td>
@@ -808,6 +917,22 @@
           $(P)$(R)PSPacketsReceived_RBV</td>
         <td>
           longin</td>
+      </tr>
+      <tr>
+        <td>
+          N/A</td>
+        <td>
+          N/A</td>
+        <td>
+          r/o</td>
+        <td>
+          Received packets rate</td>
+        <td>
+          N/A</td>
+        <td>
+          $(P)$(R)PSPacketsReceivedRate_RBV</td>
+        <td>
+          calc</td>
       </tr>
       <tr>
         <td>
@@ -827,6 +952,22 @@
       </tr>
       <tr>
         <td>
+          N/A</td>
+        <td>
+          N/A</td>
+        <td>
+          r/o</td>
+        <td>
+          Requested packets rate</td>
+        <td>
+          N/A</td>
+        <td>
+          $(P)$(R)PSPacketsRequestedRate_RBV</td>
+        <td>
+          calc</td>
+      </tr>
+      <tr>
+        <td>
           PSStatPacketsResent</td>
         <td>
           asynInt32</td>
@@ -843,6 +984,22 @@
       </tr>
       <tr>
         <td>
+          N/A</td>
+        <td>
+          N/A</td>
+        <td>
+          r/o</td>
+        <td>
+          Resent packets rate</td>
+        <td>
+          N/A</td>
+        <td>
+          $(P)$(R)PSPacketsResentRate_RBV</td>
+        <td>
+          calc</td>
+      </tr>
+      <tr>
+        <td>
           PSBadFrameCounter</td>
         <td>
           asynInt32</td>
@@ -856,6 +1013,22 @@
           $(P)$(R)PSBadFrameCounter_RBV</td>
         <td>
           longin</td>
+      </tr>
+      <tr>
+        <td>
+          N/A</td>
+        <td>
+          N/A</td>
+        <td>
+          r/o</td>
+        <td>
+          Bad frame rate</td>
+        <td>
+          N/A</td>
+        <td>
+          $(P)$(R)PSBadFrameRate_RBV</td>
+        <td>
+          calc</td>
       </tr>
     </tbody>
   </table>
