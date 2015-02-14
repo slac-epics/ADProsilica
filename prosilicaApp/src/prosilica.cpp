@@ -471,7 +471,6 @@ void prosilica::frameCallback(tPvFrame *pFrame)
     NDArray *pTempImage;
     int binX, binY;
     int bitsPerPixel    = 8;
-    int bytesPerPixel   = 1;
     int badFrameCounter;
     int bayerConvert = PSBayerConvertNone;
     epicsInt32 bayerPattern;
@@ -520,8 +519,7 @@ void prosilica::frameCallback(tPvFrame *pFrame)
             case ePvFmtMono8:
                 colorMode = NDColorModeMono;
                 pImage->dataType = NDUInt8;
-                bitsPerPixel    = 8;
-                bytesPerPixel   = 1;
+                bitsPerPixel  = pFrame->BitDepth;
                 pImage->ndims = 2;
                 pImage->dims[0].size    = pFrame->Width;
                 pImage->dims[0].offset  = pFrame->RegionX;
@@ -534,8 +532,7 @@ void prosilica::frameCallback(tPvFrame *pFrame)
             case ePvFmtMono16:
                 colorMode = NDColorModeMono;
                 pImage->dataType = NDUInt16;
-                bitsPerPixel    = 16;
-                bytesPerPixel   = 2;
+                bitsPerPixel  = pFrame->BitDepth;
                 pImage->ndims = 2;
                 pImage->dims[0].size    = pFrame->Width;
                 pImage->dims[0].offset  = pFrame->RegionX;
@@ -549,8 +546,7 @@ void prosilica::frameCallback(tPvFrame *pFrame)
                 if (bayerConvert == PSBayerConvertNone) {
                     colorMode = NDColorModeBayer;
                     pImage->dataType = NDUInt8;
-                    bitsPerPixel    = 8;
-                    bytesPerPixel   = 1;
+                    bitsPerPixel  = 8;
                     pImage->ndims = 2;
                     pImage->dims[0].size   = pFrame->Width;
                     pImage->dims[0].offset = pFrame->RegionX;
@@ -576,8 +572,7 @@ void prosilica::frameCallback(tPvFrame *pFrame)
                             PvUtilityColorInterpolate(pFrame, pData, pData+1, pData+2, 2, 0);
                             colorMode = NDColorModeRGB1;
                             pImage->ndims = 3;
-                            bitsPerPixel    = 8;
-                            bytesPerPixel   = 1;
+                            bitsPerPixel    = 24;
                             pImage->dims[0].size    = 3;
                             pImage->dims[0].offset  = 0;
                             pImage->dims[0].binning = 1;
@@ -596,8 +591,7 @@ void prosilica::frameCallback(tPvFrame *pFrame)
                                                       0, (unsigned long)(2*rowSize));
                             colorMode = NDColorModeRGB2;
                             pImage->ndims = 3;
-                            bitsPerPixel    = 8;
-                            bytesPerPixel   = 1;
+                            bitsPerPixel  = 24;
                             pImage->dims[0].size   = pFrame->Width;
                             pImage->dims[0].offset = pFrame->RegionX;
                             pImage->dims[0].binning = binX;
@@ -615,8 +609,7 @@ void prosilica::frameCallback(tPvFrame *pFrame)
                             PvUtilityColorInterpolate(pFrame, pData,  pData+imageSize, pData+2*imageSize, 0, 0);
                             colorMode = NDColorModeRGB3;
                             pImage->ndims = 3;
-                            bitsPerPixel    = 8;
-                            bytesPerPixel   = 1;
+                            bitsPerPixel  = 24;
                             pImage->dims[0].size   = pFrame->Width;
                             pImage->dims[0].offset = pFrame->RegionX;
                             pImage->dims[0].binning = binX;
@@ -638,8 +631,7 @@ void prosilica::frameCallback(tPvFrame *pFrame)
                     colorMode = NDColorModeBayer;
                     pImage->dataType = NDUInt16;
                     pImage->ndims = 2;
-                    bitsPerPixel    = 16;
-                    bytesPerPixel   = 2;
+                    bitsPerPixel  = pFrame->BitDepth;
                     pImage->dims[0].size    = pFrame->Width;
                     pImage->dims[0].offset  = pFrame->RegionX;
                     pImage->dims[0].binning = binX;
@@ -665,8 +657,7 @@ void prosilica::frameCallback(tPvFrame *pFrame)
                             PvUtilityColorInterpolate(pFrame, pData, pData+1, pData+2, 2, 0);
                             colorMode = NDColorModeRGB1;
                             pImage->ndims = 3;
-                            bitsPerPixel    = 8;
-                            bytesPerPixel   = 1;
+                            bitsPerPixel  = 24;
                             pImage->dims[0].size    = 3;
                             pImage->dims[0].offset  = 0;
                             pImage->dims[0].binning = 1;
@@ -685,8 +676,7 @@ void prosilica::frameCallback(tPvFrame *pFrame)
                                                       0, (unsigned long)(2*rowSize));
                             colorMode = NDColorModeRGB2;
                             pImage->ndims = 3;
-                            bitsPerPixel    = 8;
-                            bytesPerPixel   = 1;
+                            bitsPerPixel  = 24;
                             pImage->dims[0].size   = pFrame->Width;
                             pImage->dims[0].offset = pFrame->RegionX;
                             pImage->dims[0].binning = binX;
@@ -704,8 +694,7 @@ void prosilica::frameCallback(tPvFrame *pFrame)
                             PvUtilityColorInterpolate(pFrame, pData,  pData+imageSize, pData+2*imageSize, 0, 0);
                             colorMode = NDColorModeRGB3;
                             pImage->ndims = 3;
-                            bitsPerPixel    = 8;
-                            bytesPerPixel   = 1;
+                            bitsPerPixel  = 24;
                             pImage->dims[0].size   = pFrame->Width;
                             pImage->dims[0].offset = pFrame->RegionX;
                             pImage->dims[0].binning = binX;
@@ -726,8 +715,7 @@ void prosilica::frameCallback(tPvFrame *pFrame)
                 colorMode = NDColorModeRGB1;
                 pImage->dataType = NDUInt8;
                 pImage->ndims = 3;
-                bitsPerPixel    = 8;
-                bytesPerPixel   = 1;
+                bitsPerPixel  = 24;
                 pImage->dims[0].size    = 3;
                 pImage->dims[0].offset  = 0;
                 pImage->dims[0].binning = 1;
@@ -743,8 +731,7 @@ void prosilica::frameCallback(tPvFrame *pFrame)
                 colorMode = NDColorModeRGB1;
                 pImage->dataType = NDUInt16;
                 pImage->ndims = 3;
-                bitsPerPixel    = 16;
-                bytesPerPixel   = 2;
+                bitsPerPixel  = 48;
                 pImage->dims[0].size    = 3;
                 pImage->dims[0].offset  = 0;
                 pImage->dims[0].binning = 1;
@@ -766,8 +753,8 @@ void prosilica::frameCallback(tPvFrame *pFrame)
         pImage->pAttributeList->add("BayerPattern", "Bayer Pattern", NDAttrInt32, &bayerPattern);
         pImage->pAttributeList->add("ColorMode", "Color Mode", NDAttrInt32, &colorMode);
 
+        pImage->bitsPerElement  = bitsPerPixel;
         setIntegerParam( NDBitsPerPixel,  bitsPerPixel  );
-        setIntegerParam( NDBytesPerPixel, bytesPerPixel );
 
         /* Now set timeStamp field in pImage */
         pImage->uniqueId = pFrame->FrameCount;
