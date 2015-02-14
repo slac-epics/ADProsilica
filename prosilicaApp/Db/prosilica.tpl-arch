@@ -51,8 +51,6 @@ $(P)$(R)PSPacketsRequestedRate_RBV	1
 $(P)$(R)PSPacketsResent_RBV			1
 $(P)$(R)PSPacketsResentRate_RBV		1
 
-$(P)$(R)PSBayerConvert				10		monitor
-$(P)$(R)PSBayerConvert_RBV			10		monitor
 $(P)$(R)PSByteRate					10		monitor
 $(P)$(R)PSReadStatistics			10		monitor
 $(P)$(R)PSResetTimer				10		monitor
