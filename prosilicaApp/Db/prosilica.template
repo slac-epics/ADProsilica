@@ -151,6 +151,7 @@ record(mbbo, "$(P)$(R)BayerConvert")
    field(TWVL, "2")
    field(THST, "RGB3")
    field(THVL, "3")
+	info( autosaveFields, "DESC VAL" )
 }
 
 record(mbbi, "$(P)$(R)BayerConvert_RBV")
@@ -193,6 +194,7 @@ record(longout, "$(P)$(R)PSReadStatistics")
    field(DISV, "0" )
    field(SDIS, "$(P)$(R)AsynIO.CNCT" )
    field(PINI, "YES" )
+	info( autosaveFields, "SCAN" )
 }
 
 record(stringin, "$(P)$(R)PSDriverType_RBV")
@@ -226,6 +228,7 @@ record(longout, "$(P)$(R)PSByteRate")
    field(DTYP, "asynInt32")
    field(OUT,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))PS_BYTE_RATE")
    field(VAL,  "115000000")
+	info( autosaveFields, "VAL" )
 }
 
 record(longin, "$(P)$(R)PSByteRate_RBV")
@@ -241,6 +244,7 @@ record(longin, "$(P)$(R)PSByteRate_RBV")
    field( LLSV, "MAJOR" )
    field( HSV,  "MINOR" )
    field( HHSV, "MAJOR" )
+	info( autosaveFields, "HHSV HIGH HIHI HSV LLSV LOLO LOW LSV" )
 }
 
 record( longout, "$(P)$(R)PSResendLookback" )
@@ -298,6 +302,7 @@ record(longin, "$(P)$(R)PSPacketSize_RBV")
    field( LOLO, "1499" )
    field( LSV,  "MINOR" )
    field( LLSV, "MAJOR" )
+	info( autosaveFields, "HHSV HIGH HIHI HSV LLSV LOLO LOW LSV" )
 }
 
 record(longin, "$(P)$(R)PSFramesCompleted_RBV")
@@ -319,6 +324,7 @@ record(calc, "$(P)$(R)PSFramesCompletedRate_RBV" )
     field(SCAN, "1 second" )
 	field( LOW,  "0" )
 	field( LSV,  "MINOR" )
+	info( autosaveFields, "HHSV HIGH HIHI HSV LLSV LOLO LOW LSV" )
 }
 
 record(longin, "$(P)$(R)PSFramesDropped_RBV")
@@ -342,13 +348,14 @@ record(calc, "$(P)$(R)PSFramesDroppedRate_RBV" )
 	field(HIHI, "5" )
 	field( HSV, "MINOR" )
 	field(HHSV, "MAJOR" )
+	info( autosaveFields, "HHSV HIGH HIHI HSV LLSV LOLO LOW LSV" )
 }
 
 record(longin, "$(P)$(R)PSPacketsErroneous_RBV")
 {
-   field(DTYP, "asynInt32")
-   field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))PS_PACKETS_ERRONEOUS")
-   field(SCAN, "I/O Intr")
+	field(DTYP, "asynInt32")
+	field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))PS_PACKETS_ERRONEOUS")
+	field(SCAN, "I/O Intr")
 }
 
 record(calc, "$(P)$(R)PSPacketsErroneousRate_RBV" )
@@ -365,6 +372,7 @@ record(calc, "$(P)$(R)PSPacketsErroneousRate_RBV" )
 	field(HIHI, "5" )
 	field( HSV, "MINOR" )
 	field(HHSV, "MAJOR" )
+	info( autosaveFields, "HHSV HIGH HIHI HSV LLSV LOLO LOW LSV" )
 }
 
 record(longin, "$(P)$(R)PSPacketsMissed_RBV")
@@ -388,6 +396,7 @@ record(calc, "$(P)$(R)PSPacketsMissedRate_RBV" )
 	field(HIHI, "50" )
 	field( HSV, "MINOR" )
 	field(HHSV, "MAJOR" )
+	info( autosaveFields, "HHSV HIGH HIHI HSV LLSV LOLO LOW LSV" )
 }
 
 record(longin, "$(P)$(R)PSPacketsReceived_RBV")
@@ -411,6 +420,7 @@ record(calc, "$(P)$(R)PSPacketsReceivedRate_RBV" )
 	field(LOLO, "0" )
 	field(LSV,  "MINOR" )
 	field(LLSV, "MAJOR" )
+	info( autosaveFields, "HHSV HIGH HIHI HSV LLSV LOLO LOW LSV" )
 }
 
 record(longin, "$(P)$(R)PSPacketsRequested_RBV")
@@ -434,6 +444,7 @@ record(calc, "$(P)$(R)PSPacketsRequestedRate_RBV" )
 	field(HIHI, "10" )
 	field( HSV, "MINOR" )
 	field(HHSV, "MAJOR" )
+	info( autosaveFields, "HHSV HIGH HIHI HSV LLSV LOLO LOW LSV" )
 }
 
 record(longin, "$(P)$(R)PSPacketsResent_RBV")
@@ -457,6 +468,7 @@ record(calc, "$(P)$(R)PSPacketsResentRate_RBV" )
 	field(HIHI, "10" )
 	field( HSV, "MINOR" )
 	field(HHSV, "MAJOR" )
+	info( autosaveFields, "HHSV HIGH HIHI HSV LLSV LOLO LOW LSV" )
 }
 
 record(longin, "$(P)$(R)PSBadFrameCounter_RBV")
@@ -480,6 +492,7 @@ record(calc, "$(P)$(R)PSBadFrameRate_RBV" )
 	field(HIHI, "5" )
 	field( HSV, "MINOR" )
 	field(HHSV, "MAJOR" )
+	info( autosaveFields, "HHSV HIGH HIHI HSV LLSV LOLO LOW LSV" )
 }
 
 ###############################################################################
@@ -491,6 +504,7 @@ record(ao, "$(P)$(R)TriggerDelay")
    field(DTYP, "asynFloat64")
    field(OUT,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))PS_TRIGGER_DELAY")
    field(PREC, "6")
+	info( autosaveFields, "VAL" )
 }
 
 record(ai, "$(P)$(R)TriggerDelay_RBV")
@@ -519,6 +533,7 @@ record(mbbo, "$(P)$(R)TriggerEvent")
    field(THVL, "3")
    field(FRST, "Low level")
    field(FRVL, "4")
+	info( autosaveFields, "VAL" )
 }
 
 record(mbbi, "$(P)$(R)TriggerEvent_RBV")
@@ -551,6 +566,7 @@ record(mbbo, "$(P)$(R)TriggerOverlap")
    field(ZRVL, "0")
    field(ONST, "Previous frame")
    field(ONVL, "1")
+	info( autosaveFields, "VAL" )
 }
 
 record(mbbi, "$(P)$(R)TriggerOverlap_RBV")
@@ -636,6 +652,7 @@ record(mbbo, "$(P)$(R)SyncOut1Mode")
    field(FTVL, "14")
    field(FFST, "Strobe4")
    field(FFVL, "15")
+	info( autosaveFields, "VAL" )
 }
 
 record(mbbi, "$(P)$(R)SyncOut1Mode_RBV")
@@ -684,6 +701,7 @@ record(bo, "$(P)$(R)SyncOut1Level")
    field(OUT,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))PS_SYNC_OUT_1_LEVEL")
    field(ZNAM, "False")
    field(ONAM, "True")
+	info( autosaveFields, "VAL" )
 }
 
 record(bi, "$(P)$(R)SyncOut1Level_RBV")
@@ -702,6 +720,7 @@ record(bo, "$(P)$(R)SyncOut1Invert")
    field(OUT,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))PS_SYNC_OUT_1_INVERT")
    field(ZNAM, "Off")
    field(ONAM, "On")
+	info( autosaveFields, "VAL" )
 }
 
 record(bi, "$(P)$(R)SyncOut1Invert_RBV")
@@ -750,6 +769,7 @@ record(mbbo, "$(P)$(R)SyncOut2Mode")
    field(FTVL, "14")
    field(FFST, "Strobe4")
    field(FFVL, "15")
+	info( autosaveFields, "VAL" )
 }
 
 record(mbbi, "$(P)$(R)SyncOut2Mode_RBV")
@@ -798,6 +818,7 @@ record(bo, "$(P)$(R)SyncOut2Level")
    field(OUT,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))PS_SYNC_OUT_2_LEVEL")
    field(ZNAM, "False")
    field(ONAM, "True")
+	info( autosaveFields, "VAL" )
 }
 
 record(bi, "$(P)$(R)SyncOut2Level_RBV")
@@ -816,6 +837,7 @@ record(bo, "$(P)$(R)SyncOut2Invert")
    field(OUT,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))PS_SYNC_OUT_2_INVERT")
    field(ZNAM, "Off")
    field(ONAM, "On")
+	info( autosaveFields, "VAL" )
 }
 
 record(bi, "$(P)$(R)SyncOut2Invert_RBV")
@@ -864,6 +886,7 @@ record(mbbo, "$(P)$(R)SyncOut3Mode")
    field(FTVL, "14")
    field(FFST, "Strobe4")
    field(FFVL, "15")
+	info( autosaveFields, "VAL" )
 }
 
 record(mbbi, "$(P)$(R)SyncOut3Mode_RBV")
@@ -912,6 +935,7 @@ record(bo, "$(P)$(R)SyncOut3Level")
    field(OUT,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))PS_SYNC_OUT_3_LEVEL")
    field(ZNAM, "False")
    field(ONAM, "True")
+	info( autosaveFields, "VAL" )
 }
 
 record(bi, "$(P)$(R)SyncOut3Level_RBV")
@@ -930,6 +954,7 @@ record(bo, "$(P)$(R)SyncOut3Invert")
    field(OUT,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))PS_SYNC_OUT_3_INVERT")
    field(ZNAM, "Off")
    field(ONAM, "On")
+	info( autosaveFields, "VAL" )
 }
 
 record(bi, "$(P)$(R)SyncOut3Invert_RBV")
@@ -966,6 +991,7 @@ record(mbbo, "$(P)$(R)Strobe1Mode")
    field(EIVL, "8")
    field(NIST, "SyncIn4")
    field(NIVL, "9")
+	info( autosaveFields, "VAL" )
 }
 
 record(mbbi, "$(P)$(R)Strobe1Mode_RBV")
@@ -1002,6 +1028,7 @@ record(bo, "$(P)$(R)Strobe1CtlDuration")
    field(OUT,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))PS_STROBE_1_CTL_DURATION")
    field(ZNAM, "Off")
    field(ONAM, "On")
+	info( autosaveFields, "VAL" )
 }
 
 record(bi, "$(P)$(R)Strobe1CtlDuration_RBV")
@@ -1019,6 +1046,7 @@ record(ao, "$(P)$(R)Strobe1Delay")
    field(DTYP, "asynFloat64")
    field(OUT,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))PS_STROBE_1_DELAY")
    field(PREC, "6")
+	info( autosaveFields, "VAL" )
 }
 
 record(ai, "$(P)$(R)Strobe1Delay_RBV")
@@ -1035,6 +1063,7 @@ record(ao, "$(P)$(R)Strobe1Duration")
    field(DTYP, "asynFloat64")
    field(OUT,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))PS_STROBE_1_DURATION")
    field(PREC, "6")
+	info( autosaveFields, "VAL" )
 }
 
 record(ai, "$(P)$(R)Strobe1Duration_RBV")
