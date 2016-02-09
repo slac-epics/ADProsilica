@@ -733,8 +733,10 @@ void prosilica::frameCallback(tPvFrame *pFrame)
         pImage->pAttributeList->add("BayerPattern", "Bayer Pattern", NDAttrInt32, &bayerPattern);
         pImage->pAttributeList->add("ColorMode", "Color Mode", NDAttrInt32, &colorMode);
 
+#ifdef NDBitsPerPixelString
 		pImage->bitsPerElement	= bitsPerPixel;
         setIntegerParam( NDBitsPerPixel,  bitsPerPixel  );
+#endif
 
         /* Set the uniqueId and time stamp */
         pImage->uniqueId = pFrame->FrameCount;
