@@ -10,7 +10,7 @@ record( stringin, "$(P)$(R)CamModel" )
 
 record( stringin, "$(P)$(R)CamModelScreen" )
 {
-	field( VAL,   "prosilicaScreens/prosilica.edl" )
+	field( VAL,   "prosilicaScreens/prosilicaMore.edl" )
 	field( PINI,  "YES" )
 }
 
@@ -22,7 +22,7 @@ record( stringin, "$(P)$(R)CamType" )
 
 record( stringin, "$(P)$(R)CamTypeScreen" )
 {
-	field( VAL,   "prosilicaScreens/prosilica.edl" )
+	field( VAL,   "prosilicaScreens/prosilicaCamType.edl" )
 	field( PINI,  "YES" )
 }
 
