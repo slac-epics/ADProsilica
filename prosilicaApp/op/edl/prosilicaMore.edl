@@ -3,10 +3,10 @@ beginScreenProperties
 major 4
 minor 0
 release 1
-x 1367
-y 1597
+x 859
+y 1166
 w 430
-h 680
+h 816
 font "helvetica-medium-r-12.0"
 fontAlign "center"
 ctlFont "helvetica-medium-r-12.0"
@@ -51,7 +51,7 @@ release 0
 x 4
 y 384
 w 420
-h 288
+h 416
 lineColor index 14
 fillColor index 14
 lineWidth 0
@@ -182,15 +182,14 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 32
-y 467
-w 144
+x 12
+y 592
+w 168
 h 20
 font "helvetica-medium-r-12.0"
 fontAlign "right"
 fgColor index 14
-bgColor index 0
-useDisplayBg
+bgColor index 3
 value {
   "Frames completed"
 }
@@ -202,8 +201,8 @@ beginObjectProperties
 major 4
 minor 7
 release 0
-x 184
-y 467
+x 196
+y 592
 w 108
 h 20
 controlPv "$(P)$(R)PSFramesCompleted_RBV"
@@ -227,15 +226,14 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 52
-y 492
-w 126
+x 12
+y 616
+w 168
 h 20
 font "helvetica-medium-r-12.0"
 fontAlign "right"
 fgColor index 14
-bgColor index 0
-useDisplayBg
+bgColor index 3
 value {
   "Frames dropped"
 }
@@ -247,8 +245,8 @@ beginObjectProperties
 major 4
 minor 7
 release 0
-x 184
-y 492
+x 196
+y 616
 w 108
 h 20
 controlPv "$(P)$(R)PSFramesDropped_RBV"
@@ -272,15 +270,14 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 24
-y 516
-w 153
+x 12
+y 640
+w 168
 h 20
 font "helvetica-medium-r-12.0"
 fontAlign "right"
 fgColor index 14
-bgColor index 0
-useDisplayBg
+bgColor index 3
 value {
   "Packets erroneous"
 }
@@ -292,8 +289,8 @@ beginObjectProperties
 major 4
 minor 7
 release 0
-x 184
-y 516
+x 196
+y 640
 w 108
 h 20
 controlPv "$(P)$(R)PSPacketsErroneous_RBV"
@@ -317,15 +314,14 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 52
-y 543
-w 126
+x 12
+y 664
+w 168
 h 20
 font "helvetica-medium-r-12.0"
 fontAlign "right"
 fgColor index 14
-bgColor index 0
-useDisplayBg
+bgColor index 3
 value {
   "Packets missed"
 }
@@ -337,8 +333,8 @@ beginObjectProperties
 major 4
 minor 7
 release 0
-x 184
-y 543
+x 196
+y 664
 w 108
 h 20
 controlPv "$(P)$(R)PSPacketsMissed_RBV"
@@ -362,15 +358,14 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 32
-y 568
-w 144
+x 12
+y 688
+w 168
 h 20
 font "helvetica-medium-r-12.0"
 fontAlign "right"
 fgColor index 14
-bgColor index 0
-useDisplayBg
+bgColor index 3
 value {
   "Packets received"
 }
@@ -382,8 +377,8 @@ beginObjectProperties
 major 4
 minor 7
 release 0
-x 184
-y 568
+x 196
+y 688
 w 108
 h 20
 controlPv "$(P)$(R)PSPacketsReceived_RBV"
@@ -407,15 +402,14 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 24
-y 593
-w 153
+x 12
+y 712
+w 168
 h 20
 font "helvetica-medium-r-12.0"
 fontAlign "right"
 fgColor index 14
-bgColor index 0
-useDisplayBg
+bgColor index 3
 value {
   "Packets requested"
 }
@@ -427,8 +421,8 @@ beginObjectProperties
 major 4
 minor 7
 release 0
-x 184
-y 593
+x 196
+y 712
 w 108
 h 20
 controlPv "$(P)$(R)PSPacketsRequested_RBV"
@@ -453,14 +447,13 @@ major 4
 minor 1
 release 1
 x 12
-y 392
+y 440
 w 68
 h 20
 font "helvetica-medium-r-12.0"
 fontAlign "right"
 fgColor index 14
-bgColor index 0
-useDisplayBg
+bgColor index 3
 value {
   "Driver type"
 }
@@ -473,7 +466,7 @@ major 4
 minor 7
 release 0
 x 88
-y 392
+y 440
 w 88
 h 20
 controlPv "$(P)$(R)PSDriverType_RBV"
@@ -497,15 +490,14 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 184
-y 392
-w 108
+x 192
+y 440
+w 112
 h 20
 font "helvetica-medium-r-12.0"
 fontAlign "right"
 fgColor index 14
-bgColor index 0
-useDisplayBg
+bgColor index 3
 value {
   "Packet Size"
 }
@@ -518,7 +510,7 @@ major 4
 minor 7
 release 0
 x 312
-y 392
+y 440
 w 104
 h 20
 controlPv "$(P)$(R)PSPacketSize_RBV"
@@ -542,15 +534,14 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 88
-y 442
-w 90
+x 12
+y 568
+w 168
 h 20
 font "helvetica-medium-r-12.0"
 fontAlign "right"
 fgColor index 14
-bgColor index 0
-useDisplayBg
+bgColor index 3
 value {
   "Frame rate"
 }
@@ -563,7 +554,7 @@ major 4
 minor 7
 release 0
 x 312
-y 442
+y 568
 w 104
 h 20
 controlPv "$(P)$(R)PSFrameRate_RBV"
@@ -588,14 +579,13 @@ major 4
 minor 1
 release 1
 x 12
-y 417
+y 540
 w 68
 h 20
 font "helvetica-medium-r-12.0"
 fontAlign "right"
 fgColor index 14
-bgColor index 0
-useDisplayBg
+bgColor index 3
 value {
   "Update rate"
 }
@@ -607,15 +597,14 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 52
-y 644
-w 128
+x 12
+y 760
+w 168
 h 20
 font "helvetica-medium-r-12.0"
 fontAlign "right"
 fgColor index 14
-bgColor index 0
-useDisplayBg
+bgColor index 3
 value {
   "Bad frames"
 }
@@ -627,8 +616,8 @@ beginObjectProperties
 major 4
 minor 7
 release 0
-x 184
-y 644
+x 196
+y 760
 w 108
 h 20
 controlPv "$(P)$(R)PSBadFrameCounter_RBV"
@@ -652,8 +641,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 184
-y 416
+x 196
+y 540
 w 108
 h 20
 font "helvetica-medium-r-12.0"
@@ -672,7 +661,7 @@ major 4
 minor 7
 release 0
 x 312
-y 492
+y 616
 w 104
 h 20
 controlPv "$(P)$(R)PSFramesDroppedRate_RBV"
@@ -698,7 +687,7 @@ major 4
 minor 7
 release 0
 x 312
-y 516
+y 640
 w 104
 h 20
 controlPv "$(P)$(R)PSPacketsErroneousRate_RBV"
@@ -724,7 +713,7 @@ major 4
 minor 7
 release 0
 x 312
-y 543
+y 664
 w 104
 h 20
 controlPv "$(P)$(R)PSPacketsMissedRate_RBV"
@@ -750,7 +739,7 @@ major 4
 minor 7
 release 0
 x 312
-y 568
+y 688
 w 104
 h 20
 controlPv "$(P)$(R)PSPacketsReceivedRate_RBV"
@@ -776,7 +765,7 @@ major 4
 minor 7
 release 0
 x 312
-y 593
+y 712
 w 104
 h 20
 controlPv "$(P)$(R)PSPacketsRequestedRate_RBV"
@@ -802,7 +791,7 @@ major 4
 minor 7
 release 0
 x 312
-y 618
+y 736
 w 104
 h 20
 controlPv "$(P)$(R)PSPacketsResentRate_RBV"
@@ -828,7 +817,7 @@ major 4
 minor 7
 release 0
 x 312
-y 644
+y 760
 w 104
 h 20
 controlPv "$(P)$(R)PSBadFrameRate_RBV"
@@ -854,7 +843,7 @@ major 4
 minor 7
 release 0
 x 312
-y 467
+y 592
 w 104
 h 20
 controlPv "$(P)$(R)PSFramesCompletedRate_RBV"
@@ -880,7 +869,7 @@ major 4
 minor 1
 release 1
 x 312
-y 417
+y 540
 w 104
 h 20
 font "helvetica-medium-r-12.0"
@@ -898,8 +887,8 @@ beginObjectProperties
 major 4
 minor 7
 release 0
-x 188
-y 436
+x 196
+y 568
 w 108
 h 20
 controlPv "$(P)$(R)ArrayCounter_RBV"
@@ -924,15 +913,14 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 50
-y 618
-w 126
+x 12
+y 736
+w 168
 h 20
 font "helvetica-medium-r-12.0"
 fontAlign "right"
 fgColor index 14
-bgColor index 0
-useDisplayBg
+bgColor index 3
 value {
   "Packets resent"
 }
@@ -944,8 +932,8 @@ beginObjectProperties
 major 4
 minor 7
 release 0
-x 184
-y 618
+x 196
+y 736
 w 108
 h 20
 controlPv "$(P)$(R)PSPacketsResent_RBV"
@@ -1789,7 +1777,7 @@ major 4
 minor 0
 release 0
 x 88
-y 416
+y 540
 w 88
 h 20
 fgColor index 25
@@ -1800,5 +1788,321 @@ botShadowColor index 12
 controlPv "$(P)$(R)PSReadStatistics.SCAN"
 indicatorPv "$(P)$(R)PSReadStatistics.SCAN"
 font "helvetica-bold-r-12.0"
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 192
+y 464
+w 112
+h 20
+controlPv "$(P)$(R)PSByteRate"
+format "decimal"
+font "helvetica-medium-r-12.0"
+fgColor index 25
+bgColor index 5
+editable
+motifWidget
+nullColor index 40
+smartRefresh
+fastUpdate
+useHexPrefix
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 312
+y 464
+w 104
+h 20
+controlPv "$(P)$(R)PSByteRate_RBV"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 15
+fgAlarm
+bgColor index 12
+nullColor index 40
+smartRefresh
+fastUpdate
+useHexPrefix
+showUnits
+newPos
+objType "monitors"
+noExecuteClipMask
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 12
+y 464
+w 164
+h 20
+font "helvetica-medium-r-12.0"
+fontAlign "right"
+fgColor index 14
+bgColor index 3
+value {
+  "Stream Bytes Per Sec Max"
+}
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 312
+y 488
+w 104
+h 20
+controlPv "$(P)$(R)PSResendLookback_RBV"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 15
+fgAlarm
+bgColor index 12
+nullColor index 40
+smartRefresh
+fastUpdate
+useHexPrefix
+showUnits
+newPos
+objType "monitors"
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 192
+y 488
+w 112
+h 20
+controlPv "$(P)$(R)PSResendLookback"
+format "decimal"
+font "helvetica-medium-r-12.0"
+fgColor index 25
+bgColor index 5
+editable
+motifWidget
+nullColor index 40
+smartRefresh
+fastUpdate
+useHexPrefix
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 12
+y 488
+w 164
+h 20
+font "helvetica-medium-r-12.0"
+fontAlign "right"
+fgColor index 14
+bgColor index 3
+value {
+  "Resend Lookback"
+}
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 312
+y 512
+w 104
+h 20
+controlPv "$(P)$(R)PSResendRetries_RBV"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 15
+fgAlarm
+bgColor index 12
+nullColor index 40
+smartRefresh
+fastUpdate
+useHexPrefix
+showUnits
+newPos
+objType "monitors"
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 192
+y 512
+w 112
+h 20
+controlPv "$(P)$(R)PSResendRetries"
+format "decimal"
+font "helvetica-medium-r-12.0"
+fgColor index 25
+bgColor index 5
+editable
+motifWidget
+nullColor index 40
+smartRefresh
+fastUpdate
+useHexPrefix
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 12
+y 512
+w 164
+h 20
+font "helvetica-medium-r-12.0"
+fontAlign "right"
+fgColor index 14
+bgColor index 3
+value {
+  "Resend Retries"
+}
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 312
+y 392
+w 104
+h 20
+controlPv "$(P)$(R)BayerConvert_RBV"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 15
+fgAlarm
+bgColor index 12
+limitsFromDb
+nullColor index 40
+smartRefresh
+useHexPrefix
+newPos
+objType "monitors"
+noExecuteClipMask
+endObjectProperties
+
+# (Menu Button)
+object activeMenuButtonClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 188
+y 392
+w 116
+h 20
+fgColor index 14
+fgAlarm
+bgColor index 63
+inconsistentColor index 40
+topShadowColor index 2
+botShadowColor index 12
+controlPv "$(P)$(R)BayerConvert"
+indicatorPv "$(P)$(R)BayerConvert_RBV"
+font "helvetica-medium-r-14.0"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 12
+y 392
+w 168
+h 20
+font "helvetica-medium-r-12.0"
+fontAlign "right"
+fgColor index 14
+bgColor index 3
+value {
+  "Bayer Conversion"
+}
+endObjectProperties
+
+# (Menu Button)
+object activeMenuButtonClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 188
+y 416
+w 116
+h 20
+fgColor index 14
+bgColor index 63
+inconsistentColor index 40
+topShadowColor index 2
+botShadowColor index 13
+controlPv "$(P)$(R)PSResetTimer.SCAN"
+font "helvetica-medium-r-12.0"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 8
+y 416
+w 172
+h 20
+font "helvetica-medium-r-12.0"
+fontAlign "right"
+fgColor index 14
+bgColor index 3
+value {
+  "Cam Timer Reset Interval"
+}
 endObjectProperties
 
