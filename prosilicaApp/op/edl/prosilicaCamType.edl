@@ -3,44 +3,173 @@ beginScreenProperties
 major 4
 minor 0
 release 1
-x 1199
-y 1351
+x 370
+y 1168
 w 400
-h 400
-font "helvetica-medium-r-18.0"
-ctlFont "helvetica-medium-r-8.0"
-btnFont "helvetica-medium-r-18.0"
+h 340
+font "helvetica-medium-r-12.0"
+ctlFont "helvetica-medium-r-12.0"
+btnFont "helvetica-medium-r-12.0"
 fgColor index 14
 bgColor index 3
 textColor index 14
-ctlFgColor1 index 35
-ctlFgColor2 index 40
-ctlBgColor1 index 39
-ctlBgColor2 index 68
-topShadowColor index 72
-botShadowColor index 12
-title "Prosilica Camera - $(P)$(R)"
+ctlFgColor1 index 25
+ctlFgColor2 index 15
+ctlBgColor1 index 5
+ctlBgColor2 index 12
+topShadowColor index 1
+botShadowColor index 13
+title "CamType Prosilica"
 showGrid
 snapToGrid
 gridSize 4
+disableScroll
 endScreenProperties
 
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 188
+y 244
+w 152
+h 24
+fgColor index 14
+bgColor index 3
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-12.0"
+buttonLabel "eNet Bandwidth Help"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "prosilicaScreens/bandwidthHelp.edl"
+}
+symbols {
+  0 "CAM=$(CAM)"
+}
+replaceSymbols {
+  0 1
+}
+propagateMacros {
+  0 0
+}
+icon
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 4
+y 244
+w 176
+h 24
+
+beginGroup
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 4
+y 244
+w 176
+h 24
+fgColor index 14
+bgColor index 3
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-12.0"
+buttonLabel "        Model Specific        "
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gigeScreens/camModel.edl"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "P=$(P),R=$(R),IOC=$(IOC),EVR=$(EVR),CAM=$(CAM)"
+}
+replaceSymbols {
+  0 1
+}
+propagateMacros {
+  0 0
+}
+icon
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 26
+y 248
+w 152
+h 16
+controlPv "$(P)$(R)CamModel"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 3
+limitsFromDb
+nullColor index 0
+useHexPrefix
+newPos
+objType "monitors"
+endObjectProperties
+
+endGroup
+
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 80
+y 0
+w 112
+h 24
+controlPv "$(P)$(R)CamType"
+font "helvetica-bold-r-12.0"
+fgColor index 14
+bgColor index 3
+limitsFromDb
+nullColor index 25
+useHexPrefix
+newPos
+objType "monitors"
+endObjectProperties
+
 # (Static Text)
 object activeXTextClass
 beginObjectProperties
 major 4
 minor 1
 release 1
-x 64
-y 180
-w 136
-h 20
-font "helvetica-medium-r-12.0"
-fontAlign "right"
+x 0
+y 0
+w 80
+h 24
+font "helvetica-bold-r-12.0"
 fgColor index 14
 bgColor index 3
 value {
-  "Packets Resent"
+  "Camera Type"
 }
 endObjectProperties
 
@@ -50,16 +179,298 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 64
-y 152
-w 136
+x 0
+y 28
+w 68
 h 20
 font "helvetica-medium-r-12.0"
 fontAlign "right"
 fgColor index 14
 bgColor index 3
 value {
-  "Frames dropped"
+  "Driver type"
+}
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 72
+y 28
+w 84
+h 20
+controlPv "$(P)$(R)PSDriverType_RBV"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 15
+fgAlarm
+bgColor index 12
+nullColor index 40
+smartRefresh
+fastUpdate
+useHexPrefix
+newPos
+objType "monitors"
+noExecuteClipMask
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 160
+y 28
+w 88
+h 20
+font "helvetica-medium-r-12.0"
+fontAlign "right"
+fgColor index 14
+bgColor index 3
+value {
+  "Packet Size"
+}
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 256
+y 28
+w 84
+h 20
+controlPv "$(P)$(R)PSPacketSize_RBV"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 15
+fgAlarm
+bgColor index 12
+nullColor index 40
+smartRefresh
+fastUpdate
+useHexPrefix
+newPos
+objType "monitors"
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 160
+y 52
+w 88
+h 20
+controlPv "$(P)$(R)PSByteRate"
+format "decimal"
+font "helvetica-medium-r-12.0"
+fgColor index 25
+bgColor index 5
+editable
+motifWidget
+nullColor index 40
+smartRefresh
+fastUpdate
+useHexPrefix
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 256
+y 52
+w 84
+h 20
+controlPv "$(P)$(R)PSByteRate_RBV"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 15
+fgAlarm
+bgColor index 12
+nullColor index 40
+smartRefresh
+fastUpdate
+useHexPrefix
+showUnits
+newPos
+objType "monitors"
+noExecuteClipMask
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 0
+y 52
+w 156
+h 20
+font "helvetica-medium-r-12.0"
+fontAlign "right"
+fgColor index 14
+bgColor index 3
+value {
+  "Stream Bytes Per Sec Max"
+}
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 256
+y 76
+w 84
+h 20
+controlPv "$(P)$(R)PSResendLookback_RBV"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 15
+fgAlarm
+bgColor index 12
+nullColor index 40
+smartRefresh
+fastUpdate
+useHexPrefix
+showUnits
+newPos
+objType "monitors"
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 160
+y 76
+w 88
+h 20
+controlPv "$(P)$(R)PSResendLookback"
+format "decimal"
+font "helvetica-medium-r-12.0"
+fgColor index 25
+bgColor index 5
+editable
+motifWidget
+nullColor index 40
+smartRefresh
+fastUpdate
+useHexPrefix
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 0
+y 76
+w 156
+h 20
+font "helvetica-medium-r-12.0"
+fontAlign "right"
+fgColor index 14
+bgColor index 3
+value {
+  "Resend Lookback"
+}
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 256
+y 100
+w 84
+h 20
+controlPv "$(P)$(R)PSResendRetries_RBV"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 15
+fgAlarm
+bgColor index 12
+nullColor index 40
+smartRefresh
+fastUpdate
+useHexPrefix
+showUnits
+newPos
+objType "monitors"
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 160
+y 100
+w 88
+h 20
+controlPv "$(P)$(R)PSResendRetries"
+format "decimal"
+font "helvetica-medium-r-12.0"
+fgColor index 25
+bgColor index 5
+editable
+motifWidget
+nullColor index 40
+smartRefresh
+fastUpdate
+useHexPrefix
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 0
+y 100
+w 156
+h 20
+font "helvetica-medium-r-12.0"
+fontAlign "right"
+fgColor index 14
+bgColor index 3
+value {
+  "Resend Retries"
 }
 endObjectProperties
 
@@ -69,9 +480,9 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 64
+x 0
 y 124
-w 136
+w 156
 h 20
 font "helvetica-medium-r-12.0"
 fontAlign "right"
@@ -82,18 +493,17 @@ value {
 }
 endObjectProperties
 
-# (Text Control)
-object activeXTextDspClass
+# (Text Monitor)
+object activeXTextDspClass:noedit
 beginObjectProperties
 major 4
 minor 7
 release 0
-x 208
+x 160
 y 124
 w 88
 h 20
 controlPv "$(P)$(R)PSFramesCompleted_RBV"
-format "decimal"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
 fgColor index 15
@@ -104,22 +514,40 @@ smartRefresh
 fastUpdate
 useHexPrefix
 newPos
-objType "controls"
+objType "monitors"
 noExecuteClipMask
 endObjectProperties
 
-# (Text Control)
-object activeXTextDspClass
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 0
+y 148
+w 156
+h 20
+font "helvetica-medium-r-12.0"
+fontAlign "right"
+fgColor index 14
+bgColor index 3
+value {
+  "Frames dropped"
+}
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
 beginObjectProperties
 major 4
 minor 7
 release 0
-x 208
-y 152
+x 160
+y 148
 w 88
 h 20
 controlPv "$(P)$(R)PSFramesDropped_RBV"
-format "decimal"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
 fgColor index 15
@@ -130,22 +558,239 @@ smartRefresh
 fastUpdate
 useHexPrefix
 newPos
-objType "controls"
+objType "monitors"
 noExecuteClipMask
 endObjectProperties
 
-# (Text Control)
-object activeXTextDspClass
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 0
+y 172
+w 156
+h 20
+font "helvetica-medium-r-12.0"
+fontAlign "right"
+fgColor index 14
+bgColor index 3
+value {
+  "Packets erroneous"
+}
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
 beginObjectProperties
 major 4
 minor 7
 release 0
-x 208
-y 180
+x 160
+y 172
+w 88
+h 20
+controlPv "$(P)$(R)PSPacketsErroneous_RBV"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 15
+fgAlarm
+bgColor index 12
+nullColor index 40
+smartRefresh
+fastUpdate
+useHexPrefix
+newPos
+objType "monitors"
+noExecuteClipMask
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 0
+y 196
+w 156
+h 20
+font "helvetica-medium-r-12.0"
+fontAlign "right"
+fgColor index 14
+bgColor index 3
+value {
+  "Packets missed"
+}
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 160
+y 196
+w 88
+h 20
+controlPv "$(P)$(R)PSPacketsMissed_RBV"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 15
+fgAlarm
+bgColor index 12
+nullColor index 40
+smartRefresh
+fastUpdate
+useHexPrefix
+newPos
+objType "monitors"
+noExecuteClipMask
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 256
+y 148
+w 84
+h 20
+controlPv "$(P)$(R)PSFramesDroppedRate_RBV"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 15
+fgAlarm
+bgColor index 12
+nullColor index 40
+smartRefresh
+fastUpdate
+useHexPrefix
+showUnits
+newPos
+objType "monitors"
+noExecuteClipMask
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 256
+y 172
+w 84
+h 20
+controlPv "$(P)$(R)PSPacketsErroneousRate_RBV"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 15
+fgAlarm
+bgColor index 12
+nullColor index 40
+smartRefresh
+fastUpdate
+useHexPrefix
+showUnits
+newPos
+objType "monitors"
+noExecuteClipMask
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 256
+y 196
+w 84
+h 20
+controlPv "$(P)$(R)PSPacketsMissedRate_RBV"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 15
+fgAlarm
+bgColor index 12
+nullColor index 40
+smartRefresh
+fastUpdate
+useHexPrefix
+showUnits
+newPos
+objType "monitors"
+noExecuteClipMask
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 256
+y 124
+w 84
+h 20
+controlPv "$(P)$(R)PSFramesCompletedRate_RBV"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 15
+fgAlarm
+bgColor index 12
+nullColor index 40
+smartRefresh
+fastUpdate
+useHexPrefix
+showUnits
+newPos
+objType "monitors"
+noExecuteClipMask
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 256
+y 220
+w 84
+h 20
+controlPv "$(P)$(R)PSPacketsResentRate_RBV"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 15
+fgAlarm
+bgColor index 12
+nullColor index 40
+smartRefresh
+fastUpdate
+useHexPrefix
+showUnits
+newPos
+objType "monitors"
+noExecuteClipMask
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 160
+y 220
 w 88
 h 20
 controlPv "$(P)$(R)PSPacketsResent_RBV"
-format "decimal"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
 fgColor index 15
@@ -156,158 +801,6 @@ smartRefresh
 fastUpdate
 useHexPrefix
 newPos
-objType "controls"
-noExecuteClipMask
-endObjectProperties
-
-# (Text Monitor)
-object activeXTextDspClass:noedit
-beginObjectProperties
-major 4
-minor 7
-release 0
-x 220
-y 96
-w 76
-h 20
-controlPv "$(P)$(R)BayerConvert_RBV"
-font "helvetica-medium-r-12.0"
-fontAlign "center"
-fgColor index 15
-fgAlarm
-bgColor index 12
-limitsFromDb
-nullColor index 40
-smartRefresh
-useHexPrefix
-newPos
-objType "monitors"
-noExecuteClipMask
-endObjectProperties
-
-# (Menu Button)
-object activeMenuButtonClass
-beginObjectProperties
-major 4
-minor 0
-release 0
-x 136
-y 96
-w 76
-h 20
-fgColor index 14
-fgAlarm
-bgColor index 63
-inconsistentColor index 40
-topShadowColor index 2
-botShadowColor index 12
-controlPv "$(P)$(R)BayerConvert"
-indicatorPv "$(P)$(R)BayerConvert_RBV"
-font "helvetica-medium-r-14.0"
-endObjectProperties
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 1
-x 8
-y 96
-w 120
-h 20
-font "helvetica-medium-r-12.0"
-fontAlign "right"
-fgColor index 14
-bgColor index 3
-value {
-  "Bayer Conversion"
-}
-endObjectProperties
-
-# (Related Display)
-object relatedDisplayClass
-beginObjectProperties
-major 4
-minor 4
-release 0
-x 192
-y 208
-w 104
-h 24
-fgColor index 14
-bgColor index 3
-topShadowColor index 2
-botShadowColor index 12
-font "helvetica-medium-r-12.0"
-buttonLabel "Network Stats"
-numPvs 4
-numDsps 1
-displayFileName {
-  0 "prosilicaScreens/prosilicaMore.edl"
-}
-menuLabel {
-  0 "Network Stats"
-}
-symbols {
-  0 "P=$(P),R=$(R)"
-}
-icon
-endObjectProperties
-
-# (Related Display)
-object relatedDisplayClass
-beginObjectProperties
-major 4
-minor 4
-release 0
-x 8
-y 208
-w 128
-h 24
-fgColor index 14
-bgColor index 3
-topShadowColor index 0
-botShadowColor index 14
-font "helvetica-medium-r-12.0"
-buttonLabel "prosilica.edl"
-numPvs 4
-numDsps 1
-displayFileName {
-  0 "prosilicaScreens/prosilica.edl"
-}
-symbols {
-  0 "CAM=$(CAM),P=$(CAM),R=:,IOC=$(IOC)"
-}
-replaceSymbols {
-  0 1
-}
-propagateMacros {
-  0 0
-}
-endObjectProperties
-
-# (Text Monitor)
-object activeXTextDspClass:noedit
-beginObjectProperties
-major 4
-minor 7
-release 0
-x 136
-y 68
-w 160
-h 20
-controlPv "$(P)$(R)PSPacketSize_RBV"
-font "helvetica-medium-r-12.0"
-fontAlign "center"
-fgColor index 15
-fgAlarm
-bgColor index 12
-limitsFromDb
-nullColor index 40
-smartRefresh
-useHexPrefix
-newPos
 objType "monitors"
 noExecuteClipMask
 endObjectProperties
@@ -318,17 +811,16 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 8
-y 68
-w 120
+x 0
+y 220
+w 156
 h 20
 font "helvetica-medium-r-12.0"
 fontAlign "right"
 fgColor index 14
-bgColor index 0
-useDisplayBg
+bgColor index 3
 value {
-  "Packet size (bytes)"
+  "Packets resent"
 }
 endObjectProperties
 
