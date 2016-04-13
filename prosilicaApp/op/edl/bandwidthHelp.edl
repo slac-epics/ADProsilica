@@ -1,0 +1,181 @@
+4 0 1
+beginScreenProperties
+major 4
+minor 0
+release 1
+x 492
+y 1431
+w 436
+h 580
+font "helvetica-medium-r-12.0"
+ctlFont "helvetica-medium-r-12.0"
+btnFont "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 3
+textColor index 14
+ctlFgColor1 index 15
+ctlFgColor2 index 25
+ctlBgColor1 index 12
+ctlBgColor2 index 5
+topShadowColor index 1
+botShadowColor index 11
+title "eNet Bandwidth Help"
+showGrid
+snapToGrid
+gridSize 4
+endScreenProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 16
+y 12
+w 368
+h 76
+lineColor index 6
+fill
+fillColor index 6
+lineWidth 0
+endObjectProperties
+
+# (Exit Button)
+object activeExitButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 388
+y 12
+w 40
+h 24
+fgColor index 14
+bgColor index 3
+topShadowColor index 1
+botShadowColor index 11
+label "EXIT"
+font "helvetica-medium-r-12.0"
+3d
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 36
+y 16
+w 336
+h 72
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 6
+useDisplayBg
+value {
+  "The max bandwidth for a 1000BaseT gigabit ethernet"
+  "is 125MBps, so when using more than one gigabit"
+  "camera on the same network you need to be careful"
+  "to not exceed the network capacity."
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 16
+y 96
+w 20
+h 136
+font "helvetica-medium-r-14.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 6
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 36
+y 96
+w 348
+h 136
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 6
+value {
+  "Packet size is negotiated between the camera"
+  "and the host to the max supported by your"
+  "network."
+  ""
+  "For best performance connect each camera directly"
+  "to the same switch as the host.   Set the switch"
+  "to support jumbo 9K packets and also set"
+  "the host ethernet adapter to allow jumbo"
+  "9K packets."
+}
+lineWidth 0
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 16
+y 240
+w 20
+h 320
+font "helvetica-medium-r-14.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 6
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 36
+y 240
+w 348
+h 320
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 6
+value {
+  "The Prosilica based cameras provide the following"
+  "controls which can be used to optimize performance."
+  ""
+  "   Stream Bytes Per Sec Max"
+  "      PV is PSByteRate"
+  "      The sum of this value for each gigabit camera"
+  "      sharing a network segment such as the switch to"
+  "      host connection should not exceed 125MBps."
+  ""
+  "   Resend Lookback"
+  "      PV is PSResendLookback"
+  "      This controls how many packets can go by before"
+  "      the driver will give up on a missing packet and"
+  "      issues a resend request."
+  ""
+  "   Resend Retries"
+  "      PV is PSResendRetries"
+  "      How many times to request a packet before giving up"
+  "      and dropping the frame.  Set to zero to"
+  "      disable resend requests."
+}
+lineWidth 0
+endObjectProperties
+
