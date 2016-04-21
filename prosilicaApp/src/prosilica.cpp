@@ -1036,7 +1036,7 @@ asynStatus prosilica::readStats()
     /* This parameter can be not supported */
     if (status == ePvErrNotFound) {
         status = 0;
-    	printf( "PvAttr FrameStartTriggerOverlap not supported!" );
+    	/* printf( "PvAttr FrameStartTriggerOverlap not supported!\n" ); */
         status |= setIntegerParam(PSTriggerOverlap, 0);
     } else {
         for (i=0; i<NUM_TRIGGER_OVERLAP_MODES; i++) {
