@@ -740,8 +740,9 @@ void prosilica::frameCallback(tPvFrame *pFrame)
 #endif
 
         /* Set the uniqueId and time stamp */
-        pImage->uniqueId = pFrame->FrameCount;
+        // pImage->uniqueId = pFrame->FrameCount;
         updateTimeStamp(&pImage->epicsTS);
+		pImage->uniqueId  = pImage->epicsTS.nsec & 0x1FFFF;
         const double native_frame_ticks =  ((double)pFrame->TimestampLo + (double)pFrame->TimestampHi*4294967296.);
 
         /* Determine how to set the timeStamp */
