@@ -760,8 +760,9 @@ void prosilica::frameCallback(tPvFrame *pFrame)
 #endif
 
         /* Now set timeStamp field in pImage */
-        pImage->uniqueId = pFrame->FrameCount;
+        // pImage->uniqueId = pFrame->FrameCount;
         updateTimeStamp(&pImage->epicsTS);
+        pImage->uniqueId  = pImage->epicsTS.nsec & 0x1FFFF;
         const double native_frame_ticks =  ((double)pFrame->TimestampLo + (double)pFrame->TimestampHi*4294967296.);
 
         /* Determine how to set the timeStamp */
@@ -834,16 +835,16 @@ void prosilica::frameCallback(tPvFrame *pFrame)
 
         /* Update the frame counter and numImagesCounter */
         getIntegerParam(NDArrayCounter, &imageCounter);
-    	getIntegerParam(ADNumImagesCounter, &numImagesCounter);
+        getIntegerParam(ADNumImagesCounter, &numImagesCounter);
         imageCounter++;
         numImagesCounter++;
         setIntegerParam(NDArrayCounter, imageCounter);
-    	setIntegerParam(ADNumImagesCounter, numImagesCounter);
-		if (this->framesRemaining >= 0) {
-			double	acquirePeriod;
-			getDoubleParam(ADAcquirePeriod, &acquirePeriod);
-			setDoubleParam(ADTimeRemaining, this->framesRemaining * acquirePeriod);
-		}
+        setIntegerParam(ADNumImagesCounter, numImagesCounter);
+        if (this->framesRemaining >= 0) {
+            double  acquirePeriod;
+            getDoubleParam(ADAcquirePeriod, &acquirePeriod);
+            setDoubleParam(ADTimeRemaining, this->framesRemaining * acquirePeriod);
+        }
 
         asynPrintIO(this->pasynUserSelf, ASYN_TRACEIO_DRIVER, 
             (const char *)pImage->pData, pImage->dataSize,
@@ -1062,7 +1063,7 @@ asynStatus prosilica::readStats()
     /* This parameter can be not supported */
     if (status == ePvErrNotFound) {
         status = 0;
-    	/* printf( "PvAttr FrameStartTriggerOverlap not supported!\n" ); */
+        /* printf( "PvAttr FrameStartTriggerOverlap not supported!\n" ); */
         status |= setIntegerParam(PSTriggerOverlap, 0);
     } else {
         for (i=0; i<NUM_TRIGGER_OVERLAP_MODES; i++) {
@@ -1639,7 +1640,7 @@ asynStatus prosilica::writeInt32(asynUser *pasynUser, epicsInt32 value)
                 this->framesRemaining = -1;
                 break;
            }
-    		setIntegerParam(ADNumImagesCounter, 0);
+            setIntegerParam(ADNumImagesCounter, 0);
             setIntegerParam(ADStatus, ADStatusAcquire);
             status |= PvCommandRun(this->PvHandle, "AcquisitionStart");
         } else {
