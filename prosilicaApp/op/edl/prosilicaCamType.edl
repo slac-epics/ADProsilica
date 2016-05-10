@@ -3,8 +3,8 @@ beginScreenProperties
 major 4
 minor 0
 release 1
-x 374
-y 1192
+x 1197
+y 1891
 w 400
 h 340
 font "helvetica-medium-r-12.0"
@@ -32,8 +32,8 @@ beginObjectProperties
 major 4
 minor 4
 release 0
-x 188
-y 268
+x 184
+y 220
 w 152
 h 24
 fgColor index 14
@@ -65,8 +65,8 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 4
-y 268
+x 0
+y 220
 w 176
 h 24
 
@@ -78,8 +78,8 @@ beginObjectProperties
 major 4
 minor 4
 release 0
-x 4
-y 268
+x 0
+y 220
 w 176
 h 24
 fgColor index 14
@@ -114,8 +114,8 @@ beginObjectProperties
 major 4
 minor 7
 release 0
-x 26
-y 272
+x 22
+y 224
 w 152
 h 16
 controlPv "$(P)$(R)CamModel"
@@ -332,58 +332,6 @@ value {
 }
 endObjectProperties
 
-# (Text Monitor)
-object activeXTextDspClass:noedit
-beginObjectProperties
-major 4
-minor 7
-release 0
-x 252
-y 100
-w 92
-h 20
-controlPv "$(P)$(R)PSResendLookback_RBV"
-font "helvetica-medium-r-12.0"
-fontAlign "center"
-fgColor index 15
-fgAlarm
-bgColor index 12
-nullColor index 40
-smartRefresh
-fastUpdate
-useHexPrefix
-showUnits
-newPos
-objType "monitors"
-noExecuteClipMask
-endObjectProperties
-
-# (Text Control)
-object activeXTextDspClass
-beginObjectProperties
-major 4
-minor 7
-release 0
-x 160
-y 100
-w 88
-h 20
-controlPv "$(P)$(R)PSResendLookback"
-format "decimal"
-font "helvetica-medium-r-12.0"
-fgColor index 25
-bgColor index 5
-editable
-motifWidget
-nullColor index 40
-smartRefresh
-fastUpdate
-useHexPrefix
-newPos
-objType "controls"
-noExecuteClipMask
-endObjectProperties
-
 # (Static Text)
 object activeXTextClass
 beginObjectProperties
@@ -392,96 +340,6 @@ minor 1
 release 1
 x 0
 y 100
-w 156
-h 20
-font "helvetica-medium-r-12.0"
-fontAlign "right"
-fgColor index 14
-bgColor index 3
-value {
-  "Resend Lookback"
-}
-endObjectProperties
-
-# (Text Monitor)
-object activeXTextDspClass:noedit
-beginObjectProperties
-major 4
-minor 7
-release 0
-x 252
-y 124
-w 92
-h 20
-controlPv "$(P)$(R)PSResendRetries_RBV"
-font "helvetica-medium-r-12.0"
-fontAlign "center"
-fgColor index 15
-fgAlarm
-bgColor index 12
-nullColor index 40
-smartRefresh
-fastUpdate
-useHexPrefix
-showUnits
-newPos
-objType "monitors"
-noExecuteClipMask
-endObjectProperties
-
-# (Text Control)
-object activeXTextDspClass
-beginObjectProperties
-major 4
-minor 7
-release 0
-x 160
-y 124
-w 88
-h 20
-controlPv "$(P)$(R)PSResendRetries"
-format "decimal"
-font "helvetica-medium-r-12.0"
-fgColor index 25
-bgColor index 5
-editable
-motifWidget
-nullColor index 40
-smartRefresh
-fastUpdate
-useHexPrefix
-newPos
-objType "controls"
-noExecuteClipMask
-endObjectProperties
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 1
-x 0
-y 124
-w 156
-h 20
-font "helvetica-medium-r-12.0"
-fontAlign "right"
-fgColor index 14
-bgColor index 3
-value {
-  "Resend Retries"
-}
-endObjectProperties
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 1
-x 0
-y 148
 w 156
 h 20
 font "helvetica-medium-r-12.0"
@@ -500,7 +358,7 @@ major 4
 minor 7
 release 0
 x 160
-y 148
+y 100
 w 88
 h 20
 controlPv "$(P)$(R)PSFramesCompleted_RBV"
@@ -525,7 +383,7 @@ major 4
 minor 1
 release 1
 x 0
-y 172
+y 124
 w 156
 h 20
 font "helvetica-medium-r-12.0"
@@ -544,7 +402,7 @@ major 4
 minor 7
 release 0
 x 160
-y 172
+y 124
 w 88
 h 20
 controlPv "$(P)$(R)PSFramesDropped_RBV"
@@ -569,7 +427,7 @@ major 4
 minor 1
 release 1
 x 0
-y 196
+y 148
 w 156
 h 20
 font "helvetica-medium-r-12.0"
@@ -588,7 +446,7 @@ major 4
 minor 7
 release 0
 x 160
-y 196
+y 148
 w 88
 h 20
 controlPv "$(P)$(R)PSPacketsErroneous_RBV"
@@ -613,7 +471,7 @@ major 4
 minor 1
 release 1
 x 0
-y 220
+y 172
 w 156
 h 20
 font "helvetica-medium-r-12.0"
@@ -632,7 +490,7 @@ major 4
 minor 7
 release 0
 x 160
-y 220
+y 172
 w 88
 h 20
 controlPv "$(P)$(R)PSPacketsMissed_RBV"
@@ -657,7 +515,7 @@ major 4
 minor 7
 release 0
 x 252
-y 172
+y 124
 w 92
 h 20
 controlPv "$(P)$(R)PSFramesDroppedRate_RBV"
@@ -683,7 +541,7 @@ major 4
 minor 7
 release 0
 x 252
-y 196
+y 148
 w 92
 h 20
 controlPv "$(P)$(R)PSPacketsErroneousRate_RBV"
@@ -709,7 +567,7 @@ major 4
 minor 7
 release 0
 x 252
-y 220
+y 172
 w 92
 h 20
 controlPv "$(P)$(R)PSPacketsMissedRate_RBV"
@@ -735,7 +593,7 @@ major 4
 minor 7
 release 0
 x 252
-y 148
+y 100
 w 92
 h 20
 controlPv "$(P)$(R)PSFramesCompletedRate_RBV"
@@ -761,7 +619,7 @@ major 4
 minor 7
 release 0
 x 252
-y 244
+y 196
 w 92
 h 20
 controlPv "$(P)$(R)PSPacketsResentRate_RBV"
@@ -787,7 +645,7 @@ major 4
 minor 7
 release 0
 x 160
-y 244
+y 196
 w 88
 h 20
 controlPv "$(P)$(R)PSPacketsResent_RBV"
@@ -812,7 +670,7 @@ major 4
 minor 1
 release 1
 x 0
-y 244
+y 196
 w 156
 h 20
 font "helvetica-medium-r-12.0"
