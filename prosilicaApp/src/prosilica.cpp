@@ -488,8 +488,16 @@ void prosilica::frameCallback(tPvFrame *pFrame)
 
     pImage = (NDArray *)pFrame->Context[1];
     
+    if ( pFrame->Width == 0 || pFrame->Height == 0 ) {
+        asynPrint(this->pasynUserSelf, ASYN_TRACE_ERROR, 
+            "%s:%s: ERROR, frame has invalid dimensions: %d x %d\n",
+            driverName, functionName, pFrame->Width, pFrame->Height );
+        getIntegerParam(PSBadFrameCounter, &badFrameCounter);
+        badFrameCounter++;
+        setIntegerParam(PSBadFrameCounter, badFrameCounter);
+    }
     /* If we're out of memory, pImage will be NULL */
-    if (pImage && pFrame->Status == ePvErrSuccess) {
+    else if (pImage && pFrame->Status == ePvErrSuccess) {
         /* The frame we just received has NDArray* in Context[1] */ 
         /* Set the properties of the image to those of the current frame */
         /* Convert from the PvApi data types to ADDataType */
@@ -862,7 +870,7 @@ void prosilica::frameCallback(tPvFrame *pFrame)
         /* Reset the frame buffer data pointer be this image buffer data pointer */
         pFrame->ImageBuffer = pImage->pData;
     } else {
-        asynPrint(this->pasynUserSelf, ASYN_TRACE_FLOW, 
+        asynPrint(this->pasynUserSelf, ASYN_TRACE_ERROR, 
             "%s:%s: ERROR, frame has error code %d\n",
             driverName, functionName, pFrame->Status);
         getIntegerParam(PSBadFrameCounter, &badFrameCounter);
