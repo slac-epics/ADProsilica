@@ -1179,7 +1179,7 @@ record( ao, "$(P)$(R)DriverProcDelay" )
 record( calc, "$(P)$(R)TrigToTS_Calc" )
 {
 	field( INPA, "$(P)$(R)AcquireTime_RBV CP MS" )
-	field( INPB, "$(P)$(R)PSByteRate CP MS" ) 
+	field( INPB, "$(P)$(R)XmitDelay CP MS" ) 
 	field( INPC, "$(P)$(R)DriverProcDelay CP MS" )
 	field( CALC, "A+B+C" )
 	field( EGU,  "sec" )
