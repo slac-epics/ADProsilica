@@ -1,0 +1,20 @@
+#==============================================================
+#
+#  Name: RELEASE_NOTES
+#
+#==============================================================
+
+R2.1-1.0.0:	11-Oct-2016, B. Hill  (bhill)
+	Updated to build w/ git work-flow
+	Includes fix for startup connection issues.
+	Added bitsPerPixel support
+	Improved diagnostic messages
+	Added code to update ADNumImagesCounter and ADTimeRemaining
+	Added a camera_config directory w/ templates and env files for each camera model
+	Camera model template files provide pv's to map model name to edl screen names
+	Added macro defaults for ADDR and TIMEOUT everywhere
+	Added PVs: Gain, PSResendLookback, PSResendLookback_RBV, PSResendRetries,
+		PSResendRetries_RBV, XmitRate, CamProcDelay, DriverProcDelay
+	and calc records: XmitDelay, TrigToTS_Calc
+	Added bandwidthHelp.edl screen and screens for prosilica bandwidth
+		and a prosilicaMore.edl screen for all other prosilica pvs

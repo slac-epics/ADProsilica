@@ -478,7 +478,7 @@ void prosilica::frameCallback(tPvFrame *pFrame)
     
     if ( pFrame->Width == 0 || pFrame->Height == 0 ) {
         asynPrint(this->pasynUserSelf, ASYN_TRACE_ERROR, 
-            "%s:%s: ERROR, frame has invalid dimensions: %d x %d\n",
+            "%s:%s: ERROR, frame has invalid dimensions: %ld x %ld\n",
             driverName, functionName, pFrame->Width, pFrame->Height );
         getIntegerParam(PSBadFrameCounter, &badFrameCounter);
         badFrameCounter++;
