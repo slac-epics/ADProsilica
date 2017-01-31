@@ -5,23 +5,8 @@
 -include $(TOP)/../../RELEASE_SITE
 -include $(TOP)/RELEASE_SITE
 
-# Check for multiple inclusions
-ifneq ($(wildcard "include $(TOP)/../../RELEASE_SITE"),)
-ifneq ($(wildcard "include $(TOP)/RELEASE_SITE"),)
-$(error Two RELEASE_SITE files found: $(TOP)/RELEASE_SITE and $(TOP)/../../RELEASE_SITE!)
-endif
-endif
-
-# Check for undefined EPICS_MODULES
-ifndef EPICS_MODULES
-	ifneq ($(wildcard "include $(TOP)/../../RELEASE_SITE"),)
-		$(info RELEASE_SITE Read: $(TOP)/../../RELEASE_SITE)
-	endif
-	ifneq ($(wildcard "include $(TOP)/RELEASE_SITE"),)
-		$(info RELEASE_SITE Read: $(TOP)/RELEASE_SITE)
-	endif
-	$(error EPICS_MODULES not defined!)
-endif
+# Check that EPICS_MODULES was defined in a RELEASE_SITE file
+-include $(TOP)/../../RELEASE_SITE.check
 
 # ==========================================================
 # Define the version strings for all needed modules
@@ -31,8 +16,8 @@ endif
 # Don't set your version to anything such as "test" that
 # could match a directory name.
 # ==========================================================
-ADCORE_MODULE_VERSION   = R2.2-1.0.0
-ASYN_MODULE_VERSION     = R4.30-1.0.0
+ADCORE_MODULE_VERSION   = R2.2-1.1.1
+ASYN_MODULE_VERSION     = R4.30-1.1.1
 
 # ==========================================================
 # Define module paths using pattern
@@ -46,14 +31,5 @@ ASYN    = $(EPICS_MODULES)/asyn/$(ASYN_MODULE_VERSION)
 # Set EPICS_BASE last so it appears last in the DB, DBD, INCLUDE, and LIB search paths
 EPICS_BASE              = $(EPICS_SITE_TOP)/base/$(BASE_MODULE_VERSION)
 
-# Check for undefined EPICS_BASE
-ifndef EPICS_BASE
-	ifneq ($(wildcard "include $(TOP)/../../RELEASE_SITE"),)
-		$(info RELEASE_SITE Read: $(TOP)/../../RELEASE_SITE)
-	endif
-	ifneq ($(wildcard "include $(TOP)/RELEASE_SITE"),)
-		$(info RELEASE_SITE Read: $(TOP)/RELEASE_SITE)
-	endif
-	$(error EPICS_BASE not defined!)
-endif
-
+# Check for invalid EPICS_BASE
+-include $(TOP)/../../EPICS_BASE.check
