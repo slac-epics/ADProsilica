@@ -16,8 +16,8 @@
 # Don't set your version to anything such as "test" that
 # could match a directory name.
 # ==========================================================
-ADCORE_MODULE_VERSION   = R2.2-1.1.1
-ASYN_MODULE_VERSION     = R4.30-1.1.1
+ADCORE_MODULE_VERSION   = R2.2-1.1.4
+ASYN_MODULE_VERSION     = R4.30-1.1.2
 
 # ==========================================================
 # Define module paths using pattern
