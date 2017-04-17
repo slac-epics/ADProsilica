@@ -4,6 +4,12 @@
 #
 #==============================================================
 
+R2.1-1.0.5:	17-Apr-2017, B. Hill  (bhill)
+	Updated to ADCore/R2.6-0.3.0
+
+R2.1-1.0.4:	7-Apr-2017, B. Hill  (bhill)
+	Updated to ADCore/R2.6-0.2.0 and asyn/R4.31-0.1.0
+
 R2.1-1.0.3:	23-Mar-2017, B. Hill  (bhill)
 	Updated to support rhel7-x86_64 build
 
