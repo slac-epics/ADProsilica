@@ -5,7 +5,6 @@
 #   BASE_MODULE_VERSION
 #   EPICS_MODULES 
 # from one of the following options
--include $(TOP)/../../../../RELEASE_SITE
 -include $(TOP)/../../RELEASE_SITE
 -include $(TOP)/RELEASE_SITE
 
@@ -30,7 +29,6 @@ ASYN_MODULE_VERSION             = R4.31-0.1.0
 #  or
 # FOO = /Full/Path/To/Development/Version 
 # ==========================================================
-ADPROSILICA     = $(TOP)/../..
 ADCORE          = $(EPICS_MODULES)/ADCore/$(ADCORE_MODULE_VERSION)
 ADSUPPORT       = $(EPICS_MODULES)/ADSupport/$(ADSUPPORT_MODULE_VERSION)
 ASYN            = $(EPICS_MODULES)/asyn/$(ASYN_MODULE_VERSION)
