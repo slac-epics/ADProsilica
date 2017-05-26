@@ -4,6 +4,9 @@
 #
 #==============================================================
 
+R2.1-1.0.7:	2017-May-26, B. Hill  (bhill)
+	Updated to ADCore/R2.6-2.2.0 and asyn/R4.31-1.0.0
+
 R2.1-1.0.6:	2017-May-02, B. Hill  (bhill)
 	Updated to ADCore/R2.6-2.1.0
 
