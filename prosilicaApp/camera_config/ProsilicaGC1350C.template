@@ -26,3 +26,10 @@ record( stringin, "$(P)$(R)CamTypeScreen" )
 	field( PINI,  "YES" )
 }
 
+# Not supported on ProsilicaGC1350C
+record(mbbo, "$(P)$(R)TriggerOverlap")
+{
+    field(DISA, "1")
+    field(PINI, "NO")
+	info( autosaveFields, "" )
+}
