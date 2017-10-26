@@ -3,6 +3,9 @@
 #  Name: RELEASE_NOTES
 #
 #==============================================================
+R2.1-1.3.1: 2017-10-25, B. Hill (bhill)
+	Update to ADCore/R2.6-2.3.0 for averaging fix
+
 R2.1-1.3.0: 2017-09-12, B. Hill (bhill)
 	Update macos PvAPI libs to V1.1.28 from Allied Vision and install libPvAPI.dylib
 
