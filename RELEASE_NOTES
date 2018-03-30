@@ -3,6 +3,9 @@
 #  Name: RELEASE_NOTES
 #
 #==============================================================
+R2.1-1.4.2: 2018-03-29, B. Hill (bhill)
+	Updated to ADCore/R3.1-2.1.1
+
 R2.1-1.4.1: 2018-03-08, B. Hill (bhill)
 	Revert to ADCore/R2.6-2.2.0 and asyn/R4.31-1.0.0 so I can
 		support new cameras w/ ADCore/R2.6-2.2.0
