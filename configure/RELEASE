@@ -8,3 +8,14 @@
 -include $(TOP)/RELEASE.local
 -include $(TOP)/configure/RELEASE.local
 
+# Test for required macros
+# These should be defined by one of the above local RELEASE variants
+ifeq ($(wildcard $(EPICS_BASE)),)
+$(error Invalid EPICS_BASE path: $(EPICS_BASE))
+endif
+ifeq ($(wildcard $(ADCORE)),)
+$(error Invalid ADCORE path: $(ADCORE))
+endif
+ifeq ($(wildcard $(ASYN)),)
+$(error Invalid ASYN path: $(ASYN))
+endif
