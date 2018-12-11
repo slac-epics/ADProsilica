@@ -3,6 +3,10 @@
 #  Name: RELEASE_NOTES
 #
 #==============================================================
+R2.1-1.4.3: 2018-12-11, J. Sheppard (sheppard)
+    Added support (.template/.env files) for new GigE camera
+    model MakoG234B
+
 R2.1-1.4.2: 2018-03-29, B. Hill (bhill)
 	Updated to ADCore/R3.1-2.1.1
 
