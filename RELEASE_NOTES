@@ -3,6 +3,10 @@
 #  Name: RELEASE_NOTES
 #
 #==============================================================
+R2.1-1.5.0: 2019-01-31, B. Hill (bhill)
+	Updated to ADCore/R3.1-2.3.0
+	Bumping tag to R2.1-1.5.0 instead of R2.1-1.4.4 to relect src changes vs R2.1-1.4.2
+
 R2.1-1.4.4: 2019-03-13 Bruce Hill
 	ADCore/R3.1-2.3.1 ADSupport/R1.1-0.1.1 asyn/R4.31-0.1.0
 	Added checks for valid EPICS_BASE and module paths
