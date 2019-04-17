@@ -16,9 +16,6 @@ endif
 ifeq ($(wildcard $(ADCORE)),)
 $(error Invalid ADCORE path: $(ADCORE))
 endif
-ifeq ($(wildcard $(ADSUPPORT)),)
-$(error Invalid ADSUPPORT path: $(ADSUPPORT))
-endif
 ifeq ($(wildcard $(ASYN)),)
 $(error Invalid ASYN path: $(ASYN))
 endif
