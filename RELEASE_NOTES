@@ -3,6 +3,12 @@
 #  Name: RELEASE_NOTES
 #
 #==============================================================
+R2.1-1.5.2: 2019-07-30, B. Hill (bhill)
+	Update to ADCore/R3.1-2.3.3 and asyn/R4.32-1.0.0
+
+R2.1-1.5.1: 2019-05-06, T. Johnson (tjohnson)
+	Add support for the Allied Vision MakoG158B
+
 R2.1-1.5.0: 2019-01-31, B. Hill (bhill)
 	Updated to ADCore/R3.1-2.3.0
 	Bumping tag to R2.1-1.5.0 instead of R2.1-1.4.4 to relect src changes vs R2.1-1.4.2
