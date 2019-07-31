@@ -3,8 +3,24 @@
 #  Name: RELEASE_NOTES
 #
 #==============================================================
+R2.2-1.0.0: 2019-09-09 Bruce Hill
+	Set BUILD_IOCS=NO to avoid complications and delays w/ normal build.
+	Added iocs related targets to allow iocs build w/o setting BUILD_IOCS
+	Merged in SLAC features from R2.1-1.5.1
+	Leave dependencies at ADCore/R3.1-2.3.1 and asyn/R4.31-0.1.0
+
 R2.2-0.1.0: 2017-04-21 Hugo Slepicka
 	Updated to build w/ git work-flow
+
+R2.1-1.5.2: 2019-07-30, B. Hill (bhill)
+	Update to ADCore/R3.1-2.3.3 and asyn/R4.32-1.0.0
+
+R2.1-1.5.1: 2019-05-06, T. Johnson (tjohnson)
+	Add support for the Allied Vision MakoG158B
+
+R2.1-1.5.0: 2019-01-31, B. Hill (bhill)
+	Updated to ADCore/R3.1-2.3.0
+	Bumping tag to R2.1-1.5.0 instead of R2.1-1.4.4 to relect src changes vs R2.1-1.4.2
 
 R2.1-1.4.4: 2019-03-13 Bruce Hill
 	ADCore/R3.1-2.3.1 ADSupport/R1.1-0.1.1 asyn/R4.31-0.1.0
