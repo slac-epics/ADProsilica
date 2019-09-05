@@ -1,4 +1,6 @@
 RELEASE_SITE
+archive
+autosave
 bin
 lib
 include
@@ -12,4 +14,5 @@ dllPath.bat
 auto_settings.sav*
 O.*/
 *~
+*.log
 *.swp
