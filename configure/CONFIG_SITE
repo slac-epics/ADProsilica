@@ -16,7 +16,7 @@
 #   continue building anyway if conflicts are found.
 CHECK_RELEASE = YES
 
-BUILD_IOCS = YES
+BUILD_IOCS = NO
 
 # Set this when you only want to compile this application
 # #   for a subset of the cross-compiled target architectures
@@ -51,3 +51,4 @@ ifdef T_A
   -include $(AREA_DETECTOR)/configure/CONFIG_SITE.Common.$(T_A)
   -include $(AREA_DETECTOR)/configure/CONFIG_SITE.$(EPICS_HOST_ARCH).$(T_A)
 endif
+
