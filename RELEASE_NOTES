@@ -3,6 +3,10 @@
 #  Name: RELEASE_NOTES
 #
 #==============================================================
+
+R2.2-0.1.1: 2020-08-03 scondam
+	Build with asyn R4.32-1.0.0, ADCore R3.1-2.3.3, ADSupport R1.1-0.1.1
+
 R2.2-0.1.0: 2017-04-21 Hugo Slepicka
 	Updated to build w/ git work-flow
 
