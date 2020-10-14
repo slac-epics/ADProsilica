@@ -1167,9 +1167,12 @@ record( ao, "$(P)$(R)PacketOverhead" )
 
 # Number of packets per image
 # Prosilica DataType_RBV UInt8=0, UInt16=1
+# Manta sends full rows of pixels, but SizeY can
+# be reduced for higher framerate.
 record( calc, "$(P)$(R)NumPacketsPerImage" )
 {
-	field( INPA, "$(P)$(R)ArraySizeX_RBV CP MS" )
+#	field( INPA, "$(P)$(R)ArraySizeX_RBV CP MS" )
+	field( INPA, "$(P)$(R)MaxSizeX_RBV CP MS" )
 	field( INPB, "$(P)$(R)ArraySizeY_RBV CP MS" )
 	field( INPC, "$(P)$(R)BitsPerPixel_RBV CPP MS" )
 	field( INPD, "$(P)$(R)DataType_RBV CPP MS" )
