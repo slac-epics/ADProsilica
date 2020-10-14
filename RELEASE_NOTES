@@ -4,6 +4,10 @@
 #
 #==============================================================
 
+R2.1-1.6.0: 2020-10-14 Bruce Hill
+	Better XmitDelay calculation.
+    Manta camera sends full rows and only does ROI on height.
+
 R2.1-1.5.4: 2020-10-13 Bruce Hill
 	Add additional PVs for characterizing gigE image xmit time.
 	Update to ADCore/R3.1-2.3.5
