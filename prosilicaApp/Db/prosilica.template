@@ -1138,7 +1138,7 @@ record( ao, "$(P)$(R)XmitRate" )
 
 record( ao, "$(P)$(R)CamProcDelay" )
 {
-	field( DOL,  "1.0e-4" )
+	field( DOL,  "1.2e-4" )
 	field( EGU,  "Sec" )
 	field( PREC, "3" )
 	field( PINI, "YES" )
@@ -1148,7 +1148,7 @@ record( ao, "$(P)$(R)CamProcDelay" )
 # TODO: Compute this
 record( calc, "$(P)$(R)DelayPerPacket" )
 {
-	field( INPA, "1.0e-5" )
+	field( INPA, "1.8e-5" )
 	field( CALC, "A" )
 	field( EGU,  "sec" )
 	field( PREC, "4" )
@@ -1158,7 +1158,7 @@ record( calc, "$(P)$(R)DelayPerPacket" )
 
 record( ao, "$(P)$(R)PacketOverhead" )
 {
-	field( DOL,  "770" )
+	field( DOL,  "60" )
 	field( EGU,  "bytes" )
 	field( PREC, "0" )
 	field( PINI, "YES" )
@@ -1182,23 +1182,50 @@ record( calc, "$(P)$(R)NumPacketsPerImage" )
 	field( EGU,  "Pkts" )
 }
 
+# XmitDelay for Manta G419B
+# 0.0001 sec exposure, 0 delay
+#    1 x    1 image,  0.31ms to  0.41ms
+#    1 x 1024 image, 30.56ms to 30.64ms
+#    1 x 2048 image, 60.78ms to 60.90ms
+# 1024 x    1 image,  0.33ms to  0.38ms
+# 2048 x    1 image,  0.35ms to  0.44ms
+# 1024 x 1024 image, 30.62ms to 30.70ms
+# 2048 x 2048 image, 73.83ms to 74.01ms
+# ProcDelayPerCol =  (1.26-0.25)/2047 = 4.93e-4 ms/col = 0.493e-6 s/col
+# XmitDelayPerRow = (60.78-0.25)/2047 = 0.296 ms/row   = 0.296e-3 s/row
+# Not using XmitDelayPerRow as it's contribution already included in NumPacketsPerImage
+# Testing showed that in terms of transmission over ethernet,
+# each additional row added transmission time for 2048 pixels.
+# Assume ProcDelayPerPixel = ProcDelayPerCol
+# where ProcDelayPerPixel accounts for additional processing delay for each additional pixel.
 record( calc, "$(P)$(R)XmitDelay" )
 {
-#	field( INPA, "$(P)$(R)ArraySize_RBV CP MS" )
 	field( INPA, "$(P)$(R)NumPacketsPerImage CPP MS" )
 	field( INPB, "$(P)$(R)PSPacketSize_RBV CPP MS" )
 	field( INPC, "$(P)$(R)PacketOverhead CPP MS" )
 	field( INPD, "$(P)$(R)DelayPerPacket CPP MS" )
 	field( INPE, "$(P)$(R)XmitRate CPP MS" )
 	field( INPF, "$(P)$(R)CamProcDelay CPP MS" )
-	field( CALC, "A*(((B+C)/E)+D)+F" )
+	field( INPG, "$(P)$(R)ArraySize_RBV CP MS" )
+	field( INPH, "$(P)$(R)ProcDelayPerPixel CP MS" )
+	field( CALC, "A*(((B+C)/E)+D)-D+F+(G*H)" )
 	field( EGU,  "Sec" )
 	field( PREC, "5" )
 }
 
+record( ao, "$(P)$(R)ProcDelayPerPixel" )
+{
+#	field( DOL,  "0.493e-6" )
+	field( DOL,  "2.5e-8" )
+	field( EGU,  "Sec/px" )
+	field( PREC, "5" )
+	field( PINI, "YES" )
+	info( autosaveFields, "VAL" )
+}
+
 record( ao, "$(P)$(R)DriverProcDelay" )
 {
-	field( DOL,  "1.0e-3" )
+	field( DOL,  "2.0e-5" )
 	field( EGU,  "Sec" )
 	field( PREC, "3" )
 	field( PINI, "YES" )
