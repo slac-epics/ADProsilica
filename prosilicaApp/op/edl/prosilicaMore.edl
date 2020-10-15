@@ -3,8 +3,8 @@ beginScreenProperties
 major 4
 minor 0
 release 1
-x 944
-y 884
+x 421
+y 64
 w 713
 h 816
 font "helvetica-medium-r-12.0"
@@ -2197,7 +2197,6 @@ nullColor index 40
 smartRefresh
 fastUpdate
 useHexPrefix
-showUnits
 newPos
 objType "monitors"
 noExecuteClipMask
@@ -2219,7 +2218,6 @@ font "helvetica-medium-r-12.0"
 fgColor index 25
 bgColor index 5
 editable
-motifWidget
 nullColor index 40
 smartRefresh
 fastUpdate
@@ -2268,7 +2266,6 @@ nullColor index 40
 smartRefresh
 fastUpdate
 useHexPrefix
-showUnits
 newPos
 objType "monitors"
 noExecuteClipMask
@@ -2290,7 +2287,6 @@ font "helvetica-medium-r-12.0"
 fgColor index 25
 bgColor index 5
 editable
-motifWidget
 nullColor index 40
 smartRefresh
 fastUpdate
@@ -2319,58 +2315,6 @@ value {
 }
 endObjectProperties
 
-# (Text Monitor)
-object activeXTextDspClass:noedit
-beginObjectProperties
-major 4
-minor 7
-release 0
-x 616
-y 464
-w 96
-h 20
-controlPv "$(P)$(R)TriggerSoftware_RBV"
-font "helvetica-medium-r-12.0"
-fontAlign "center"
-fgColor index 15
-fgAlarm
-bgColor index 12
-nullColor index 40
-smartRefresh
-fastUpdate
-useHexPrefix
-showUnits
-newPos
-objType "monitors"
-noExecuteClipMask
-endObjectProperties
-
-# (Text Control)
-object activeXTextDspClass
-beginObjectProperties
-major 4
-minor 7
-release 0
-x 540
-y 464
-w 72
-h 20
-controlPv "$(P)$(R)TriggerDelay"
-format "decimal"
-font "helvetica-medium-r-12.0"
-fgColor index 25
-bgColor index 5
-editable
-motifWidget
-nullColor index 40
-smartRefresh
-fastUpdate
-useHexPrefix
-newPos
-objType "controls"
-noExecuteClipMask
-endObjectProperties
-
 # (Static Text)
 object activeXTextClass
 beginObjectProperties
@@ -2386,7 +2330,7 @@ fontAlign "right"
 fgColor index 14
 bgColor index 3
 value {
-  "TriggerDelay"
+  "Software Trigger"
 }
 endObjectProperties
 
@@ -2400,7 +2344,7 @@ x 616
 y 488
 w 96
 h 20
-controlPv "$(P)$(R)TriggerDelay_RBV"
+controlPv "$(P)$(R)TriggerMode_RBV"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
 fgColor index 15
@@ -2410,7 +2354,6 @@ nullColor index 40
 smartRefresh
 fastUpdate
 useHexPrefix
-showUnits
 newPos
 objType "monitors"
 noExecuteClipMask
@@ -2426,13 +2369,12 @@ x 540
 y 488
 w 72
 h 20
-controlPv "$(P)$(R)TriggerDelay"
+controlPv "$(P)$(R)TriggerMode"
 format "decimal"
 font "helvetica-medium-r-12.0"
 fgColor index 25
 bgColor index 5
 editable
-motifWidget
 nullColor index 40
 smartRefresh
 fastUpdate
@@ -2457,78 +2399,30 @@ fontAlign "right"
 fgColor index 14
 bgColor index 3
 value {
-  "TriggerDelay"
+  "TriggerMode"
 }
 endObjectProperties
 
-# (Text Monitor)
-object activeXTextDspClass:noedit
-beginObjectProperties
-major 4
-minor 7
-release 0
-x 616
-y 512
-w 96
-h 20
-controlPv "$(P)$(R)TriggerDelay_RBV"
-font "helvetica-medium-r-12.0"
-fontAlign "center"
-fgColor index 15
-fgAlarm
-bgColor index 12
-nullColor index 40
-smartRefresh
-fastUpdate
-useHexPrefix
-showUnits
-newPos
-objType "monitors"
-noExecuteClipMask
-endObjectProperties
-
-# (Text Control)
-object activeXTextDspClass
-beginObjectProperties
-major 4
-minor 7
-release 0
-x 540
-y 512
-w 72
-h 20
-controlPv "$(P)$(R)TriggerDelay"
-format "decimal"
-font "helvetica-medium-r-12.0"
-fgColor index 25
-bgColor index 5
-editable
-motifWidget
-nullColor index 40
-smartRefresh
-fastUpdate
-useHexPrefix
-newPos
-objType "controls"
-noExecuteClipMask
-endObjectProperties
-
-# (Static Text)
-object activeXTextClass
+# (Message Button)
+object activeMessageButtonClass
 beginObjectProperties
 major 4
 minor 1
-release 1
-x 428
-y 512
-w 104
+release 0
+x 540
+y 464
+w 72
 h 20
-font "helvetica-medium-r-12.0"
-fontAlign "right"
 fgColor index 14
-bgColor index 3
-value {
-  "TriggerDelay"
-}
+onColor index 5
+offColor index 5
+topShadowColor index 1
+botShadowColor index 13
+controlPv "$(P)$(R)TriggerSoftware"
+pressValue "1"
+onLabel "Snap!"
+offLabel "Snap"
+3d
+font "helvetica-medium-r-14.0"
 endObjectProperties
 
