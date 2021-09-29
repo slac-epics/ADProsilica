@@ -3,8 +3,8 @@
 #  Name: RELEASE_NOTES
 #
 #==============================================================
-R2.9-1.0.0: 2020-10-13 Bruce Hill
-	R2-9 plus SLAC build support and features
+R2.5-1.0.0: 2020-10-13 Bruce Hill
+	R2-5 plus SLAC build support and features
 
 R2.2-1.0.0: 2019-09-09 Bruce Hill
 	Set BUILD_IOCS=NO to avoid complications and delays w/ normal build.
