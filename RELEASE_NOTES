@@ -3,6 +3,9 @@
 #  Name: RELEASE_NOTES
 #
 #==============================================================
+R2.5-1.0.1: 2021-09-29 Bruce Hill
+	Update to ADCore/R3.9-1.0.2
+
 R2.5-1.0.0: 2020-10-13 Bruce Hill
 	R2-5 plus SLAC build support and features
 
