@@ -3,10 +3,13 @@
 #  Name: RELEASE_NOTES
 #
 #==============================================================
-R2.2-1.1.4: 2022-06-28 Janos Vamosi
+R2.2-1.1.5: 2022-06-28 Janos Vamosi
 	Update libPvAPI for linuxRT supporting 12 cameras
 
-R2.2-1.1.3: 2022-04-08 Janos Vamosi
+R2.5-1.1.4: 2022-05-25 Peregrine McGehee/Mike Estrada
+	Add support for the Allied Vision MakoG032B and MakoG040B
+
+R2.5-1.1.3: 2022-04-08 Janos Vamosi
 	Update libPvAPI for rhel7 only
 
 R2.5-1.1.2:	2022-02-09 Bruce Hill
