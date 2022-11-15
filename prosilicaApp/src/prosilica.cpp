@@ -507,8 +507,8 @@ void prosilica::frameCallback(tPvFrame *pFrame)
         /* First lets set the timestamp so it is as close to acquisition as 
          * possible and set the unique id from the framecounter */
 
-        pImage->uniqueId = pFrame->FrameCount;
         updateTimeStamp(&pImage->epicsTS);
+        pImage->uniqueId  = pImage->epicsTS.nsec & 0x1FFFF;	// SLAC fiducial
 
         getIntegerParam(ADBinX, &binX);
         getIntegerParam(ADBinY, &binY);
@@ -768,9 +768,6 @@ void prosilica::frameCallback(tPvFrame *pFrame)
 #endif
 
         /* Now set timeStamp field in pImage */
-        // pImage->uniqueId = pFrame->FrameCount;
-        updateTimeStamp(&pImage->epicsTS);
-        pImage->uniqueId  = pImage->epicsTS.nsec & 0x1FFFF;
         const double native_frame_ticks =  ((double)pFrame->TimestampLo + (double)pFrame->TimestampHi*4294967296.);
 
         /* Determine how to set the timeStamp */
