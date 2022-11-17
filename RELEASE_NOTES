@@ -3,6 +3,9 @@
 #  Name: RELEASE_NOTES
 #
 #==============================================================
+R2.2-1.2.0: 2022-11-15 Bruce Hill
+	Fixed a merge error that resulted in 2 calls to updateTimeStamp per image.
+
 R2.2-1.1.5: 2022-06-28 Janos Vamosi
 	Update libPvAPI for linuxRT supporting 12 cameras
 
