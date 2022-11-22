@@ -3,10 +3,13 @@
 #  Name: RELEASE_NOTES
 #
 #==============================================================
-R2.2-1.2.0: 2022-11-15 Bruce Hill
+R2.5-1.3.0: 2022-11-22 Bruce Hill
+	Fix XmitDelay CALC field.
+
+R2.5-1.2.0: 2022-11-15 Bruce Hill
 	Fixed a merge error that resulted in 2 calls to updateTimeStamp per image.
 
-R2.2-1.1.5: 2022-06-28 Janos Vamosi
+R2.5-1.1.5: 2022-06-28 Janos Vamosi
 	Update libPvAPI for linuxRT supporting 12 cameras
 
 R2.5-1.1.4: 2022-05-25 Peregrine McGehee/Mike Estrada
