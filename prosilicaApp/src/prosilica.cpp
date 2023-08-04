@@ -507,6 +507,18 @@ void prosilica::frameCallback(tPvFrame *pFrame)
         /* First lets set the timestamp so it is as close to acquisition as 
          * possible and set the unique id from the framecounter */
 
+        /* But even before that, let's set timeStamp field in pImage
+         * in case we want to use this! */
+        const double native_frame_ticks =  ((double)pFrame->TimestampLo + (double)pFrame->TimestampHi*4294967296.);
+
+	/* This we always want in seconds! */
+	extern double camera_ts;
+	if (this->timeStampFrequency != 0)
+	    pImage->timeStamp = native_frame_ticks / this->timeStampFrequency;
+	else
+	    pImage->timeStamp = native_frame_ticks;
+	camera_ts = pImage->timeStamp;
+
         updateTimeStamp(&pImage->epicsTS);
         pImage->uniqueId  = pImage->epicsTS.nsec & 0x1FFFF;	// SLAC fiducial
 
@@ -570,6 +582,8 @@ void prosilica::frameCallback(tPvFrame *pFrame)
                     dims[1] = pFrame->Width;
                     dims[2] = pFrame->Height;
                     pImage = this->pNDArrayPool->alloc(ndims, dims, NDUInt8, this->maxFrameSize, NULL);
+                    pImage->timeStamp = pTempImage->timeStamp;
+                    pImage->epicsTS   = pTempImage->epicsTS;
                     epicsUInt8 *pData = (epicsUInt8 *)pImage->pData;
                     switch (bayerConvert) {
                         default:
@@ -654,6 +668,8 @@ void prosilica::frameCallback(tPvFrame *pFrame)
                     dims[1] = pFrame->Width;
                     dims[2] = pFrame->Height;
                     pImage = this->pNDArrayPool->alloc(ndims, dims, NDUInt16, this->maxFrameSize, NULL);
+                    pImage->timeStamp = pTempImage->timeStamp;
+                    pImage->epicsTS   = pTempImage->epicsTS;
                     epicsUInt16 *pData = (epicsUInt16 *)pImage->pData;
 
                     switch (bayerConvert) {
@@ -766,9 +782,6 @@ void prosilica::frameCallback(tPvFrame *pFrame)
         pImage->bitsPerElement  = bitsPerPixel;
         setIntegerParam( NDBitsPerPixel,  bitsPerPixel  );
 #endif
-
-        /* Now set timeStamp field in pImage */
-        const double native_frame_ticks =  ((double)pFrame->TimestampLo + (double)pFrame->TimestampHi*4294967296.);
 
         /* Determine how to set the timeStamp */
         PSTimestampType_t   timestamp_type = PSTimestampTypeNativeTicks;

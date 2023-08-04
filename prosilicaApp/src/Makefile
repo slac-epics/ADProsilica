@@ -20,7 +20,7 @@ endif
 LIBRARY_IOC_WIN32 += prosilica
 LIBRARY_IOC_Linux += prosilica
 LIBRARY_IOC_Darwin += prosilica
-LIB_SRCS += prosilica.cpp
+LIB_SRCS += prosilica.cpp camera_ts.cpp
 
 LIB_LIBS += PvAPI
 
