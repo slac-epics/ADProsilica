@@ -3,6 +3,11 @@
 #  Name: RELEASE_NOTES
 #
 #==============================================================
+R2.5-1.3.6: 2024-10-02 Jeremy Lorelli
+	Add support for rhel9
+	Build against ADCore/R3.10-1.1.1
+	Build against asyn/R4.39-1.0.2
+
 R2.5-1.3.2: 2023-08-04 Michael Browne
 	Add support for internal timestamping and fix up timestamps on buffer reformats.
 
