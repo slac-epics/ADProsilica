@@ -44,6 +44,9 @@ LIB_INSTALLS_Linux += ../os/rhel6-x86_64/libPvAPI.a
 else ifeq (rhel7-x86_64, $(findstring rhel7-x86_64, $(T_A)))
 LIB_INSTALLS_Linux += ../os/rhel7-x86_64/libPvAPI.a
 
+else ifeq (rhel9-x86_64, $(findstring rhel9-x86_64, $(T_A)))
+LIB_INSTALLS_Linux += ../os/rhel9-x86_64/libPvAPI.a
+
 endif
 
 #=============================
