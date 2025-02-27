@@ -592,10 +592,11 @@ void prosilica::frameCallback(tPvFrame *pFrame)
                                 driverName, functionName, bayerConvert );
                             break;
                         case PSBayerConvertRGB1: {
-                            PvUtilityColorInterpolate(pFrame, pData, pData+1, pData+2, 2, 0);
+                            int rowSize = pFrame->Width;
+                            PvUtilityColorInterpolate(pFrame, pData+rowSize, pData, pData+1, 2, 0);
                             colorMode = NDColorModeRGB1;
                             pImage->ndims = 3;
-                            bitsPerPixel    = 24;
+                            bitsPerPixel    = pFrame->BitDepth;;
                             pImage->dims[0].size    = 3;
                             pImage->dims[0].offset  = 0;
                             pImage->dims[0].binning = 1;
@@ -679,10 +680,11 @@ void prosilica::frameCallback(tPvFrame *pFrame)
                                 driverName, functionName, bayerConvert );
                             break;
                         case PSBayerConvertRGB1: {
-                            PvUtilityColorInterpolate(pFrame, pData, pData+1, pData+2, 2, 0);
+                            int rowSize = pFrame->Width;
+                            PvUtilityColorInterpolate(pFrame, pData+rowSize, pData, pData+1, 2, 0);
                             colorMode = NDColorModeRGB1;
                             pImage->ndims = 3;
-                            bitsPerPixel  = 24;
+                            bitsPerPixel  = pFrame->BitDepth;
                             pImage->dims[0].size    = 3;
                             pImage->dims[0].offset  = 0;
                             pImage->dims[0].binning = 1;
